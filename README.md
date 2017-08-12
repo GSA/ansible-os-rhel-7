@@ -9,7 +9,7 @@ This role **will make changes to the system** that could break things. This is n
 
 ## IMPORTANT INSTALL STEP
 
-This code is based on the GSA Red Hat Enterprise Linux Security Benchmark v1.0 and the [CIS RedHat Enterprise Linux 7 Benchmark v2.1.1 - 01-31-2017 ](https://community.cisecurity.org/collab/public/index.php).
+This code is based on the GSA Red Hat Enterprise Linux Security Benchmark v1.0 and the [CIS RedHat Enterprise Linux 7 Benchmark v2.1.1 ](https://community.cisecurity.org/collab/public/index.php).
 
 This code originated from work done by [Sam Doran](https://github.com/samdoran/ansible-role-stig) and the team at [MindPointGroup](https://github.com/MindPointGroup)
 
