@@ -108,6 +108,7 @@
     - '-w /sbin/rmmod -p x -k modules'
     - '-w /sbin/modprobe -p x -k modules'
     - '-a always,exit arch=b64 -S init_module -S delete_module -k modules'
+  when: rhel7gsa_firewall_status == true
   tags:
       - auditd
       - id_4.1.4
