@@ -36,6 +36,7 @@ Example Playbook
 -------------------------
 
 ```
+---
 - name: Harden Server
   hosts: all
   become: yes

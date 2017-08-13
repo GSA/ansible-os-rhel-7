@@ -1,0 +1,6 @@
+- name: Harden Server
+  hosts: all
+  become: yes
+
+  roles:
+    - gsa_hardening
