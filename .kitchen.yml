@@ -1,0 +1,45 @@
+
+---
+driver:
+  name: docker
+  use_sudo: false
+  privileged: true
+  http_proxy: <%= ENV['http_proxy'] || nil %>
+  https_proxy: <%= ENV['https_proxy'] || nil %>
+
+transport:
+  name: sftp
+  max_ssh_sessions: 5
+
+provisioner:
+  name: ansible_playbook
+  roles_path: ../ansible-os-rhel-7
+  #requirements_path: requirements.yml
+  hosts: all
+  playbook: test.yml
+  ansible_verbose: true
+  ansible_verbosity: 4
+  ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
+  require_ansible_omnibus: false
+  ansible_connection: ssh
+  http_proxy: <%= ENV['http_proxy'] || nil %>
+  https_proxy: <%= ENV['https_proxy'] || nil %>
+  #Testing - Busser requires Chef to run test suites
+  require_chef_for_busser: false
+  require_ruby_for_busser: false
+
+platforms:
+  - name: centos-7
+    driver: 
+    image: rndmh3ro/docker-centos7-ansible:latest
+      #dockerfile: test/Dockerfiles/Dockerfile.centos-7
+      #run_command: /sbin/init
+
+suites:
+  - name: test
+
+#verifier:
+#  name: inspec
+#  sudo: true
+#  inspec_tests:
+#    - https://github.com/dev-sec/linux-baseline
