@@ -17,7 +17,7 @@ jobs:
           command: bundle install
       - run:
           name: Run test-kitchen
-          command: bundle exec kitchen test test-ubuntu-1404
+          command: bundle exec kitchen test test-centos-7
           
 workflows:
   version: 2

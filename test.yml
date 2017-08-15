@@ -1,6 +1,7 @@
 - name: Testing
   hosts: all
-  #become: yes
+  #playbook requires become to run cmd as root
+  become: yes
 
   roles:
     - ansible-os-rhel-7
