@@ -1,9 +1,12 @@
 - name: "SCORED | 5.1.1 | Ensure cron daemon is enabled"
+  become: true
   service:
       name: crond
       enabled: yes
   tags:
       - id_5.1.1
+  #FIXME
+  ignore_errors: True         
 
 - name: "SCORED | 5.1.2 | Ensure permissions on /etc/crontab are configured"
   file:
@@ -13,8 +16,11 @@
       mode: 0600
   tags:
       - id_5.1.2
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.3 | Ensure permissions on /etc/cron.hourly are configured"
+  become: true
   file:
       dest: /etc/cron.hourly
       owner: root
@@ -22,6 +28,8 @@
       mode: 0600
   tags:
       - id_5.1.3
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.4 | Ensure permissions on /etc/cron.daily are configured"
   file:
@@ -31,6 +39,8 @@
       mode: 0600
   tags:
       - id_5.1.4
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.5 | Ensure permissions on /etc/cron.weekly are configured"
   file:
@@ -40,6 +50,8 @@
       mode: 0600
   tags:
       - id_5.1.5
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.6 | Ensure permissions on /etc/cron.monthly are configured"
   file:
@@ -49,6 +61,8 @@
       mode: 0600
   tags:
       - id_5.1.6
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.7 | Ensure permissions on /etc/cron.d are configured"
   file:
@@ -59,6 +73,8 @@
       mode: 0600
   tags:
       - id_5.1.7
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
@@ -66,6 +82,8 @@
       state: absent
   tags:
       - id_5.1.8
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
@@ -76,6 +94,8 @@
       mode: 0600
   tags:
       - id_5.1.8
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
@@ -83,6 +103,8 @@
       state: absent
   tags:
       - id_5.1.8
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
@@ -93,6 +115,8 @@
       mode: 0600
   tags:
       - id_5.1.8
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.2.1 | Ensure permissions on /etc/ssh/sshd_config are configured"
   file:
@@ -503,6 +527,8 @@
   command: authconfig --passalgo=sha512 --update
   tags:
       - id_5.3.4
+  #FIXME
+  ignore_errors: True        
 
 - name: "SCORED | 5.4.1.1 | Ensure password expiration is 90 days or less"
   lineinfile:
