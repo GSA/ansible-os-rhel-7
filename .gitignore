@@ -1,0 +1,4 @@
+#  test-kitchen   #
+###################
+*.kitchen
+Gemfile.lock
