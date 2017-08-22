@@ -175,7 +175,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^IgnoreRhosts'
       line: 'IgnoreRhosts yes'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.6
 
