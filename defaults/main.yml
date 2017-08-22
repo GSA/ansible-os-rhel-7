@@ -46,6 +46,9 @@ rhel7gsa_allow_autofs: false
 # xinetd required
 rhel7gsa_xinetd_required: false
 
+# Configure squashfs
+rhel7gsa_ssh_required: false
+
 # RedHat Satellite Subscription items
 rhel7gsa_rhnsd_required: false
 
@@ -72,8 +75,6 @@ rhel7gsa_aide_cron:
   aide_day: '*'
   aide_month: '*'
   aide_weekday: '*'
-
-
 
 # SELinux policy
 rhel7gsa_selinux_pol: targeted
