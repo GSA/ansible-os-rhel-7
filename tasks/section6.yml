@@ -225,7 +225,7 @@
   changed_when: "result6_2_8.stdout"
   failed_when: "result6_2_8.stdout"
   tags:
-    - id_6.2.8      
+    - id_6.2.8
 
 - name: "PRELIM | List users accounts"
   command: "awk -F: '{print $1}' /etc/passwd"

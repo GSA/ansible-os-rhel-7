@@ -119,7 +119,7 @@
       name: rhnsd
       state: stopped
       enabled: no
-  when: ansible_distribution == "RedHat" and rhnsd_service_status and not rhel7cis_rhnsd_required
+  when: ansible_distribution == "RedHat" and rhnsd_service_status and not rhel7gsa_rhnsd_required
   tags:
       - id_1.2.5
 
@@ -147,14 +147,14 @@
 - name: "SCORED | 1.3.2 | PATCH | Ensure filesystem integrity is regularly checked"
   cron:
       name: Run AIDE integrity check weekly
-      cron_file: "{{ rhel7cis_aide_cron['cron_file'] }}"
-      user: "{{ rhel7cis_aide_cron['cron_user'] }}"
-      minute: "{{ rhel7cis_aide_cron['aide_minute'] | default('0') }}"
-      hour: "{{ rhel7cis_aide_cron['aide_hour'] | default('5') }}"
-      day: "{{ rhel7cis_aide_cron['aide_day'] | default('*') }}"
-      month: "{{ rhel7cis_aide_cron['aide_month'] | default('*') }}"
-      weekday: "{{ rhel7cis_aide_cron['aide_weekday'] | default('*') }}"
-      job: "{{ rhel7cis_aide_cron['aide_job'] }}"
+      cron_file: "{{ rhel7gsa_aide_cron['cron_file'] }}"
+      user: "{{ rhel7gsa_aide_cron['cron_user'] }}"
+      minute: "{{ rhel7gsa_aide_cron['aide_minute'] | default('0') }}"
+      hour: "{{ rhel7gsa_aide_cron['aide_hour'] | default('5') }}"
+      day: "{{ rhel7gsa_aide_cron['aide_day'] | default('*') }}"
+      month: "{{ rhel7gsa_aide_cron['aide_month'] | default('*') }}"
+      weekday: "{{ rhel7gsa_aide_cron['aide_weekday'] | default('*') }}"
+      job: "{{ rhel7gsa_aide_cron['aide_job'] }}"
   when: rhel7gsa_config_aide == "true"
   tags:
       - scored
