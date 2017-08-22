@@ -235,7 +235,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^MACs'
       line: 'MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.12
 
@@ -245,7 +245,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^ClientAliveInterval'
       line: 'ClientAliveInterval 900'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.13
 
@@ -255,7 +255,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^LoginGraceTime'
       line: 'LoginGraceTime 60'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.14
 
