@@ -195,7 +195,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^PermitRootLogin'
       line: 'PermitRootLogin no'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.8
 
