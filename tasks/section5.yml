@@ -125,7 +125,7 @@
       owner: root
       group: root
       mode: 0600
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.1
 
@@ -145,7 +145,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^LogLevel'
       line: 'LogLevel INFO'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.3
 
@@ -155,7 +155,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^X11Forwarding'
       line: 'X11Forwarding no'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.4
 
@@ -165,7 +165,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^(#)?MaxAuthTries \d'
       line: 'MaxAuthTries 4'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.5
 
