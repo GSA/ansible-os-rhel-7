@@ -223,7 +223,7 @@
     done
   register: result6_2_8
   changed_when: "result6_2_8.stdout"
-  failed_when: "result6_2_8.stdout"
+  #failed_when: "result6_2_8.stdout"
   ignore_errors: yes
   tags:
     - id_6.2.8
