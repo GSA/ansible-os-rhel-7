@@ -205,7 +205,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^PermitEmptyPasswords'
       line: 'PermitEmptyPasswords no'
-  when: rhel7gsa_ssh_required == true
+  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.9
 
