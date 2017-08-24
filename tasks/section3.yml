@@ -263,6 +263,12 @@
   tags:
       - id_3.6.1
 
+- name: "SCORED | 3.6.2 | Configuring ssh to not break connections"
+  command: iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT
+  when: rhel7gsa_firewall == "iptables" and rhel7gsa_firewall_status == true
+  tags:
+      - id_3.6.2
+
 - name: "SCORED | 3.6.2 | Ensure default firewall policy is configure"
   iptables:
     chain: INPUT
