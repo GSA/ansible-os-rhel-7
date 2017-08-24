@@ -292,3 +292,7 @@
   when: rhel7gsa_firewall == "iptables" and rhel7gsa_firewall_status == true
   tags:
       - id_3.6.2
+
+- name: "Saving iptables rules"
+  command: /sbin/service iptables save
+  when: rhel7gsa_firewall == "iptables" and rhel7gsa_firewall_status == true
