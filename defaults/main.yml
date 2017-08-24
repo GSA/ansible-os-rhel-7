@@ -64,7 +64,7 @@ rhel7gsa_is_router: false
 rhel7gsa_ipv6_required: true
 
 # AIDE
-rhel7gsa_config_aide: false
+rhel7gsa_config_aide: true
 # AIDE cron settings
 rhel7gsa_aide_cron:
   cron_user: root
@@ -109,7 +109,7 @@ rhel7gsa_wireless: false
 
 #rhel7gsa_firewall: firewalld
 rhel7gsa_firewall: iptables
-rhel7gsa_firewall_status: false
+rhel7gsa_firewall_status: true
 
 # Logging configuration
 rhel7gsa_config_logging: true

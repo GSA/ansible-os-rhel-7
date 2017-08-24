@@ -5,8 +5,6 @@
       enabled: yes
   tags:
       - id_5.1.1
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.2 | Ensure permissions on /etc/crontab are configured"
   file:
@@ -16,8 +14,6 @@
       mode: 0600
   tags:
       - id_5.1.2
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.3 | Ensure permissions on /etc/cron.hourly are configured"
   become: true
@@ -28,8 +24,6 @@
       mode: 0600
   tags:
       - id_5.1.3
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.4 | Ensure permissions on /etc/cron.daily are configured"
   file:
@@ -39,8 +33,6 @@
       mode: 0600
   tags:
       - id_5.1.4
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.5 | Ensure permissions on /etc/cron.weekly are configured"
   file:
@@ -50,8 +42,6 @@
       mode: 0600
   tags:
       - id_5.1.5
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.6 | Ensure permissions on /etc/cron.monthly are configured"
   file:
@@ -61,8 +51,6 @@
       mode: 0600
   tags:
       - id_5.1.6
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.7 | Ensure permissions on /etc/cron.d are configured"
   file:
@@ -73,8 +61,6 @@
       mode: 0600
   tags:
       - id_5.1.7
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
@@ -82,8 +68,6 @@
       state: absent
   tags:
       - id_5.1.8
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
@@ -94,8 +78,6 @@
       mode: 0600
   tags:
       - id_5.1.8
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
@@ -103,8 +85,6 @@
       state: absent
   tags:
       - id_5.1.8
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
@@ -115,8 +95,6 @@
       mode: 0600
   tags:
       - id_5.1.8
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.2.1 | Ensure permissions on /etc/ssh/sshd_config are configured"
   file:
@@ -125,7 +103,6 @@
       owner: root
       group: root
       mode: 0600
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.1
 
@@ -135,7 +112,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^Protocol'
       line: 'Protocol 2'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.2
 
@@ -145,7 +121,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^LogLevel'
       line: 'LogLevel INFO'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.3
 
@@ -155,7 +130,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^X11Forwarding'
       line: 'X11Forwarding no'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.4
 
@@ -165,7 +139,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^(#)?MaxAuthTries \d'
       line: 'MaxAuthTries 4'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.5
 
@@ -175,7 +148,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^IgnoreRhosts'
       line: 'IgnoreRhosts yes'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.6
 
@@ -185,7 +157,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^HostbasedAuthentication'
       line: 'HostbasedAuthentication no'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.7
 
@@ -195,7 +166,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^PermitRootLogin'
       line: 'PermitRootLogin no'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.8
 
@@ -215,7 +185,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^PermitUserEnvironment'
       line: 'PermitUserEnvironment no'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.10
 
@@ -225,7 +194,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^Ciphers'
       line: 'Ciphers aes128-ctr,aes192-ctr,aes256-ctr'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.11
 
@@ -235,7 +203,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^MACs'
       line: 'MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.12
 
@@ -245,7 +212,15 @@
       dest: /etc/ssh/sshd_config
       regexp: '^ClientAliveInterval'
       line: 'ClientAliveInterval 900'
-  #when: rhel7gsa_ssh_required == true
+  tags:
+      - id_5.2.13
+
+- name: "SCORED | 5.2.13 | Ensure SSH Idle Timeout Interval is configured"
+  lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '^ClientAliveCountMax'
+      line: 'ClientAliveCountMax 0'
   tags:
       - id_5.2.13
 
@@ -255,7 +230,6 @@
       dest: /etc/ssh/sshd_config
       regexp: '^LoginGraceTime'
       line: 'LoginGraceTime 60'
-  #when: rhel7gsa_ssh_required == true
   tags:
       - id_5.2.14
 
@@ -264,7 +238,7 @@
       state: present
       dest: /etc/ssh/sshd_config
       regexp: '^Banner'
-      line: 'Banner /etc/issue'
+      line: 'Banner /etc/.net'
   tags:
       - id_5.2.16
 
@@ -541,8 +515,6 @@
   command: authconfig --passalgo=sha512 --update
   tags:
       - id_5.3.4
-  #FIXME
-  ignore_errors: True
 
 - name: "SCORED | 5.4.1.1 | Ensure password expiration is 90 days or less"
   lineinfile:
