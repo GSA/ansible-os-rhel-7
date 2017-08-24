@@ -1,9 +1,9 @@
 ---
 
-#  - include: prelim.yml
+  - include: prelim.yml
 #    tags: prelim
 
-  - include: section1.yml
+#  - include: section1.yml
 #    tags: section1
 
 #  - include: section2.yml
