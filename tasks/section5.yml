@@ -525,7 +525,7 @@
   tags:
       - id_5.4.1.1
 
-- name: "SCORED | 5.4.1.2 | Ensure minimum days between password changes is 7 or more"
+- name: "SCORED | 5.4.1.2 | Ensure minimum days between password changes is 0 or more"
   lineinfile:
       state: present
       dest: /etc/login.defs
