@@ -27,7 +27,7 @@
       dest: /etc/group
       owner: root
       group: root
-      mode: 0644
+      mode: 0600
   tags:
       - level1
       - level2
@@ -93,12 +93,6 @@
       - level2
       - patch
       - rule_6.1.9
-
-- name: "PRELIM | Gather accounts with empty password fields"
-  shell: "cat /etc/shadow | awk -F: '($2 == \"\" ) {j++;print $1; } END {exit j}'"
-  register: empty_password_accounts
-  changed_when: no
-  check_mode: no
 
 - name: "SCORED | 6.2.1 | PATCH | Ensure password fields are not empty"
   command: passwd -l {{ item }}

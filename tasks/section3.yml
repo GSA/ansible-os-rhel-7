@@ -169,9 +169,8 @@
 - name: "UNSCORED | 3.3.3 | Ensure IPv6 is disabled"
   lineinfile:
       dest: /etc/modprobe.d/CIS.conf
-      regexp: "^(#)?options ipv6 disable="
       line: "options ipv6 disable=1"
-      create: yes
+      create: present
   when: rhel7gsa_ipv6_required == false
   tags:
       - id_3.3.3
