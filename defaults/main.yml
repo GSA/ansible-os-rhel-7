@@ -61,7 +61,7 @@ rhel7gsa_set_boot_pass: false
 rhel7gsa_is_router: false
 
 # IPv6 required
-rhel7gsa_ipv6_required: true
+rhel7gsa_ipv6_required: false
 
 # AIDE
 rhel7gsa_config_aide: true
@@ -108,7 +108,7 @@ rhel7gsa_host_allow:
 rhel7gsa_wireless: false
 
 #rhel7gsa_firewall: firewalld
-#rhel7gsa_firewall: iptables_plus !!!NOTE!!! This could break your network connections. Test before implementing. 
+#rhel7gsa_firewall: iptables_plus !!!NOTE!!! This could break your network connections. Test before implementing.
 rhel7gsa_firewall: iptables
 rhel7gsa_firewall_status: true
 
