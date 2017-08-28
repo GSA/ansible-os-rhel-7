@@ -1,7 +1,7 @@
 - name: 6.3.2 - 6.3.4 Configure PAM (Scored)
   template:
     src: password-auth
-    dest: etc/pam.d/password-auth
+    dest: /etc/pam.d/password-auth
   tags:
     - scored
     - section6.3
