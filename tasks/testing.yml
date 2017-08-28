@@ -1,7 +1,9 @@
 - name: "SCORED | 5.4.1.4 | Lock Inactive User Accounts"
-  lineinfile: >
-      dest=/etc/default/useradd
-      line='INACTIVE=35'
+  lineinfile:
+      state: present
+      dest: /etc/default/useradd
+      regexp: '^INACTIVE'
+      line: 'INACTIVE=35'
       state=present
   tags:
     -  id_5.4.1.4
