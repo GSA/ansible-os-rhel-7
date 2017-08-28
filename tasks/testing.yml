@@ -4,6 +4,6 @@
       dest: /etc/default/useradd
       regexp: '^INACTIVE'
       line: 'INACTIVE=35'
-      state=present
+      state: present
   tags:
     -  id_5.4.1.4
