@@ -15,11 +15,11 @@
 #  - include: section4.yml
 #    tags: section4
 
-#  - include: section5.yml
+  - include: section5.yml
 #    tags: section5
 
 #  - include: section6.yml
 #    tags: section6
 
-  - include: testing.yml
+#  - include: testing.yml
 #    tags: section6
