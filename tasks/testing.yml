@@ -3,6 +3,5 @@
       dest=/etc/default/useradd
       line='INACTIVE=35'
       state=present
-  when: lock_inactive
   tags:
     -  id_5.4.1.4
