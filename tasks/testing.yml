@@ -1,15 +1,19 @@
-- name: "SCORED | 5.3.2-5.3.3 | Ensure lockout for failed password attempts is configured; password-auth"
-  template:
-    src: password-auth
-    dest: /etc/pam.d/password-auth
+- name: 10.5.1 Lock Inactive User Accounts (check) (Scored)
+  command: grep INACTIVE /etc/login.defs
+  changed_when: False
+  failed_when: False
+  always_run: True
+  register: lock_inactive_rc
   tags:
-      - id_5.3.2
-      - id_5.3.3
+    - section10
+    - section10.5
 
-- name: "SCORED | 5.3.2-5.3.3 | Ensure lockout for failed password attempts is configured; password-auth"
-  template:
-    src: system-auth
-    dest: /etc/pam.d/system-auth
+- name: 10.5.2 Lock Inactive User Accounts (Scored)
+  lineinfile: >
+      dest=/etc/login.defs
+      line='INACTIVE=35'
+      state=present
+  when: lock_inactive_rc.rc == 1
   tags:
-      - id_5.3.2
-      - id_5.3.3
+    - section10
+    - section10.5   
