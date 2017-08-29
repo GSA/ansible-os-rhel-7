@@ -1,7 +1,11 @@
-- name: "SCORED | 4.2.4 | Ensure permissions on all logfiles are configured"
+- name: "SCORED | 6.1.6 | PATCH | Ensure permissions on /etc/passwd- are configured"
   file:
-    path: /var/log
-    mode: 037
-    recurse: yes
+      dest: /etc/passwd-
+      owner: root
+      group: root
+      mode: 0600
   tags:
-      - id_4.2.4
+      - level1
+      - level2
+      - patch
+      - rule_6.1.6
