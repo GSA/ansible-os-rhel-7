@@ -210,6 +210,9 @@
       - id_4.2.3
 
 - name: "SCORED | 4.2.4 | Ensure permissions on all logfiles are configured"
-  command: find /var/log -type f -exec chmod g-wx,o-rwx {} +
+  file:
+    path: /var/log
+    mode: 037
+    recurse: yes
   tags:
       - id_4.2.4
