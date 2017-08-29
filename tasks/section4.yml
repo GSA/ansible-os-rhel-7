@@ -212,7 +212,7 @@
 - name: "SCORED | 4.2.4 | Ensure permissions on all logfiles are configured"
   file:
     path: /var/log
-    mode: 037
+    mode: 740
     recurse: yes
   tags:
       - id_4.2.4

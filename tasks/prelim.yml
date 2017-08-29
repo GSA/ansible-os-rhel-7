@@ -177,14 +177,6 @@
   changed_when: no
   check_mode: no
 
-- name: "PRELIM | Register pam_password-auth"
-  command: "cat /etc/pam.d/password-auth"
-  register: pam_password_auth
-
-- name: "PRELIM | Register pam_system-auth"
-  command: "cat /etc/pam.d/system-auth"
-  register: pam_system_auth
-
 - name: "PRELIM | Gather accounts with empty password fields"
   shell: "cat /etc/shadow | awk -F: '($2 == \"\" ) {j++;print $1; } END {exit j}'"
   register: empty_password_accounts
