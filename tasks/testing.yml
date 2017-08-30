@@ -2,7 +2,8 @@
   lineinfile:
     state: present
     dest: /etc/pam.d/su
-    regexp: '^auth           required        pam_wheel.so use_uid'
+    regexp: '^#auth           required        pam_wheel.so use_uid'
     line: 'auth           required        pam_wheel.so use_uid'
+    backrefs: yes
   tags:
       - id_5.6
