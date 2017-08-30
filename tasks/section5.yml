@@ -307,7 +307,7 @@
       state: present
       dest: /etc/default/useradd
       regexp: '^INACTIVE'
-      line: 'INACTIVE=35'
+      line: 'INACTIVE=30'
   tags:
     -  id_5.4.1.4
 
@@ -337,9 +337,10 @@
     - id_5.4.4
 
 - name: "SCORED | 5.6 | Ensure access to the su command is restricted"
-  lineinfile: >
-      dest='/etc/pam.d/su'
-      line='auth            required        pam_wheel.so use_uid'
-      state=present
+  lineinfile:
+    dest: /etc/pam.d/su
+    regexp: '^auth           required        pam_wheel.so use_uid'
+    line: 'auth           required        pam_wheel.so use_uid'
+    state: present
   tags:
       - id_5.6
