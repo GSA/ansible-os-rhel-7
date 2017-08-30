@@ -1,4 +1,9 @@
+- name: Register password
+  shell: makepasswd --chars=20
+  register: user_password
+
+
 - name: Genderate Random password for ec2-user
   user:
     name: ec2-user
-    password: "{{ lookup('password', 'credentials/' + item.name + '/password.txt encrypt=md5_crypt') }}"
+    password: {user_password.stdout}
