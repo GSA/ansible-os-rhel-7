@@ -1,4 +1,4 @@
 - name: Genderate Random password for ec2-user
-  user: ec2-user
-    name: "{{ item.name }}"
+  user:
+    name: ec2-user
     password: "{{ lookup('password', 'credentials/' + item.name + '/password.txt encrypt=md5_crypt') }}"
