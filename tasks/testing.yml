@@ -1,8 +1,7 @@
-- name: "SCORED | 4 | Ensure lockout for failed password attempts is configured; password-auth"
-  template:
-    src: audit_rules
-    dest: /etc/audit/audit.rules
+- name: "SCORED | 4.2.4 | Ensure permissions on all logfiles are configured"
+  file:
+    path: /var/log
+    mode: 755
+    recurse: yes
   tags:
-      - id_5.3.2
-      - id_5.3.3
-      - id_5.3.4
+      - id_4.2.4
