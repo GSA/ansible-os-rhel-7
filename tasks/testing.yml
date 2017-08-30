@@ -1,9 +1,8 @@
-- name: Register password
-  shell: makepasswd --chars=20
-  register: user_password
-
-
-- name: Genderate Random password for ec2-user
-  user:
-    name: ec2-user
-    password: {user_password.stdout}
+- name: "SCORED | 5.6 | Ensure access to the su command is restricted"
+  lineinfile:
+    state: present
+    dest: /etc/pam.d/su
+    regexp: '^auth           required        pam_wheel.so use_uid'
+    line: 'auth           required        pam_wheel.so use_uid'
+  tags:
+      - id_5.6
