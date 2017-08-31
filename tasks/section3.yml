@@ -170,7 +170,7 @@
       dest: /etc/modprobe.d/CIS.conf
       line: "options ipv6 disable=1"
       state: present
-  when: rhel7gsa_ipv6_required == false
+  when: rhel7gsa_ipv6_required == true
   tags:
       - id_3.3.3
 
