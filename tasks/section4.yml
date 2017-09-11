@@ -1,44 +1,40 @@
-- name: "UNSCORED | 4.1.1.1 | Ensure audit log storage size is configured"
+- name: "4.1.1.1 | Ensure audit log storage size is configured"
   lineinfile:
       dest: /etc/audit/auditd.conf
       regexp: "^max_log_file"
       line: "max_log_file = 10"
       state: present
   tags:
-      - auditd
       - id_4.1.1.1
 
-- name: "SCORED | 4.1.1.2 | Ensure system is disabled when audit logs are full"
+- name: "4.1.1.2 | Ensure system is disabled when audit logs are full"
   lineinfile:
       dest: /etc/audit/auditd.conf
       regexp: "^admin_space_left_action"
       line: "admin_space_left_action = halt"
       state: present
   tags:
-      - auditd
       - id_4.1.1.2
 
-- name: "SCORED | 4.1.1.3 | Ensure audit logs are not automatically deleted"
+- name: "4.1.1.3 | Ensure audit logs are not automatically deleted"
   lineinfile:
       dest: /etc/audit/auditd.conf
       regexp: "^max_log_file_action"
       line: "max_log_file_action = keep_logs"
       state: present
   tags:
-      - auditd
       - id_4.1.1.3
 
-- name: "SCORED | 4.1.2 | Ensure auditd service is enabled"
+- name: "4.1.2 | Ensure auditd service is enabled"
   service:
       name: auditd
       state: started
       enabled: yes
   when: rhel7gsa_skip_for_travis == false
   tags:
-      - auditd
       - id_4.1.2
 
-- name: "SCORED | 4.1.4-10 & 4.1.13 | Ensure auditing for processes that start prior to auditd is enabled"
+- name: "4.1.4-10 & 4.1.13 | Ensure auditing for processes that start prior to auditd is enabled"
   replace:
       dest: /etc/default/grub
       regexp: '(^GRUB_CMDLINE_LINUX\s*\=\s*)(?:")(.+)(?<!audit=1)(?:")'
@@ -46,15 +42,13 @@
       follow: yes
   ignore_errors: yes
   tags:
-      - auditd
       - id_4.1.3
 
-- name: "SCORED | 4.1.4-4.1.17 | Configure Auditd rules and configurations."
+- name: "4.1.4-4.1.17 | Configure Auditd rules and configurations."
   template:
     src: audit_rules
     dest: /etc/audit/audit.rules
   tags:
-      - auditd
       - id_4.1.4
       - id_4.1.5
       - id_4.1.6
@@ -69,44 +63,40 @@
       - id_4.1.16
       - id_4.1.17
 
-- name: "SCORED | 4.1.15 | Ensure changes to system administration scope (sudoers) is collected"
+- name: "4.1.15 | Ensure changes to system administration scope (sudoers) is collected"
   lineinfile:
       dest: /etc/audit/rules.d/audit.rules
       line: "-w /etc/sudoers -p wa -k scope"
       state: present
   tags:
-      - auditd
       - id_4.1.15
 
-- name: "SCORED | 4.1.15 | Ensure changes to system administration scope (sudoers) is collected"
+- name: "4.1.15 | Ensure changes to system administration scope (sudoers) is collected"
   lineinfile:
       dest: /etc/audit/audit.rules
       line: "-w /etc/sudoers -p wa -k scope"
       state: present
   tags:
-      - auditd
       - id_4.1.15
 
-- name: "SCORED | 4.1.15 | Ensure changes to system administration scope (sudoers) is collected"
+- name: "4.1.15 | Ensure changes to system administration scope (sudoers) is collected"
   lineinfile:
       dest: /etc/audit/rules.d/audit.rules
       line: "-w /etc/sudoers.d -p wa -k scope"
       state: present
   tags:
-      - auditd
       - id_4.1.15
 
-- name: "SCORED | 4.2.1.1 Ensure rsyslog Service is enabled"
+- name: "4.2.1.1 Ensure rsyslog Service is enabled"
   systemd:
       name: rsyslog
       enabled: yes
       state: started
   when: rhel7gsa_logging == "rsyslog" and rhel7gsa_config_logging == true
   tags:
-      - auditd
       - id_4.2.1.1
 
-- name: "SCORED | 4.2.1.3 | Ensure rsyslog default file permissions configured"
+- name: "4.2.1.3 | Ensure rsyslog default file permissions configured"
   lineinfile:
       dest: /etc/rsyslog.conf
       regexp: "^\\$FileCreateMode"
@@ -116,17 +106,16 @@
   tags:
       - id_4.2.1.3
 
-- name: "SCORED | 4.2.2.1 Ensure rsyslog Service is enabled"
+- name: "4.2.2.1 Ensure rsyslog Service is enabled"
   systemd:
       name: syslog-ng
       enabled: yes
       state: started
   when: rhel7gsa_logging == "syslog-ng" and rhel7gsa_config_logging == true
   tags:
-      - auditd
       - id_4.2.2.1
 
-- name: "SCORED | 4.2.2.3 | Ensure rsyslog default file permissions configured"
+- name: "4.2.2.3 | Ensure rsyslog default file permissions configured"
   lineinfile:
       dest: /etc/syslog-ng/syslog-ng.conf
       regexp: "^perm\\(0640\\)"
@@ -136,7 +125,7 @@
   tags:
       - id_4.2.2.3
 
-- name: "SCORED | 4.2.3 | Ensure rsyslog or syslog-ng is installed"
+- name: "4.2.3 | Ensure rsyslog or syslog-ng is installed"
   yum:
       name: rsyslog
       state: present
@@ -144,18 +133,10 @@
   tags:
       - id_4.2.3
 
-- name: "SCORED | 4.2.3 | Ensure rsyslog or syslog-ng is installed"
+- name: "4.2.3 | Ensure rsyslog or syslog-ng is installed"
   yum:
       name: syslog-ng
       state: present
   when: rhel7gsa_logging == "syslog-ng" and rhel7gsa_config_logging == true
   tags:
       - id_4.2.3
-
-#- name: "SCORED | 4.2.4 | Ensure permissions on all logfiles are configured"
-#  file:
-#    path: /var/log
-#    mode: 755
-#    recurse: yes
-#  tags:
-#      - id_4.2.4

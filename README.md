@@ -52,4 +52,4 @@ ansible-playbook playbook.yml --connection=local
 License
 -------
 
-MIT
+Apache

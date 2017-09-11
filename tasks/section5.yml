@@ -1,4 +1,4 @@
-- name: "SCORED | 5.1.1 | Ensure cron daemon is enabled"
+- name: "5.1.1 | Ensure cron daemon is enabled"
   become: true
   service:
       name: crond
@@ -6,7 +6,7 @@
   tags:
       - id_5.1.1
 
-- name: "SCORED | 5.1.2 | Ensure permissions on /etc/crontab are configured"
+- name: "5.1.2 | Ensure permissions on /etc/crontab are configured"
   file:
       dest: /etc/crontab
       owner: root
@@ -15,7 +15,7 @@
   tags:
       - id_5.1.2
 
-- name: "SCORED | 5.1.3 | Ensure permissions on /etc/cron.hourly are configured"
+- name: "5.1.3 | Ensure permissions on /etc/cron.hourly are configured"
   become: true
   file:
       dest: /etc/cron.hourly
@@ -25,7 +25,7 @@
   tags:
       - id_5.1.3
 
-- name: "SCORED | 5.1.4 | Ensure permissions on /etc/cron.daily are configured"
+- name: "5.1.4 | Ensure permissions on /etc/cron.daily are configured"
   file:
       dest: /etc/cron.daily
       owner: root
@@ -34,7 +34,7 @@
   tags:
       - id_5.1.4
 
-- name: "SCORED | 5.1.5 | Ensure permissions on /etc/cron.weekly are configured"
+- name: "5.1.5 | Ensure permissions on /etc/cron.weekly are configured"
   file:
       dest: /etc/cron.weekly
       owner: root
@@ -43,7 +43,7 @@
   tags:
       - id_5.1.5
 
-- name: "SCORED | 5.1.6 | Ensure permissions on /etc/cron.monthly are configured"
+- name: "5.1.6 | Ensure permissions on /etc/cron.monthly are configured"
   file:
       dest: /etc/cron.monthly
       owner: root
@@ -52,7 +52,7 @@
   tags:
       - id_5.1.6
 
-- name: "SCORED | 5.1.7 | Ensure permissions on /etc/cron.d are configured"
+- name: "5.1.7 | Ensure permissions on /etc/cron.d are configured"
   file:
       dest: /etc/cron.d
       state: directory
@@ -62,14 +62,14 @@
   tags:
       - id_5.1.7
 
-- name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
+- name: "5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
       dest: /etc/at.deny
       state: absent
   tags:
       - id_5.1.8
 
-- name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
+- name: "5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
       dest: /etc/at.allow
       state: touch
@@ -79,14 +79,14 @@
   tags:
       - id_5.1.8
 
-- name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
+- name: "5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
       dest: /etc/cron.deny
       state: absent
   tags:
       - id_5.1.8
 
-- name: "SCORED | 5.1.8 | Ensure at/cron is restricted to authorized users"
+- name: "5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
       dest: /etc/cron.allow
       state: touch
@@ -96,7 +96,7 @@
   tags:
       - id_5.1.8
 
-- name: "SCORED | 5.2.1 | Ensure permissions on /etc/ssh/sshd_config are configured"
+- name: "5.2.1 | Ensure permissions on /etc/ssh/sshd_config are configured"
   file:
       dest: /etc/ssh/sshd_config
       state: file
@@ -106,7 +106,7 @@
   tags:
       - id_5.2.1
 
-- name: "SCORED | 5.2.2 | Ensure SSH Protocol is set to 2"
+- name: "5.2.2 | Ensure SSH Protocol is set to 2"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -115,7 +115,7 @@
   tags:
       - id_5.2.2
 
-- name: "SCORED | 5.2.3 | Ensure SSH LogLevel is set to INFO"
+- name: "5.2.3 | Ensure SSH LogLevel is set to INFO"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -124,7 +124,7 @@
   tags:
       - id_5.2.3
 
-- name: "SCORED | 5.2.4 | Ensure SSH X11 forwarding is disabled"
+- name: "5.2.4 | Ensure SSH X11 forwarding is disabled"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -133,7 +133,7 @@
   tags:
       - id_5.2.4
 
-- name: "SCORED | 5.2.5 | Ensure SSH MaxAuthTries is set to 4 or less"
+- name: "5.2.5 | Ensure SSH MaxAuthTries is set to 4 or less"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -142,7 +142,7 @@
   tags:
       - id_5.2.5
 
-- name: "SCORED | 5.2.6 | Ensure SSH IgnoreRhosts is enabled"
+- name: "5.2.6 | Ensure SSH IgnoreRhosts is enabled"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -151,7 +151,7 @@
   tags:
       - id_5.2.6
 
-- name: "SCORED | 5.2.7 | Ensure SSH HostbasedAuthentication is disabled"
+- name: "5.2.7 | Ensure SSH HostbasedAuthentication is disabled"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -160,7 +160,7 @@
   tags:
       - id_5.2.7
 
-- name: "SCORED | 5.2.8 | Ensure SSH root login is disabled"
+- name: "5.2.8 | Ensure SSH root login is disabled"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -169,7 +169,7 @@
   tags:
       - id_5.2.8
 
-- name: "SCORED | 5.2.9 | Ensure SSH PermitEmptyPasswords is disabled"
+- name: "5.2.9 | Ensure SSH PermitEmptyPasswords is disabled"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -179,7 +179,7 @@
   tags:
       - id_5.2.9
 
-- name: "SCORED | 5.2.10 | Ensure SSH PermitUserEnvironment is disabled"
+- name: "5.2.10 | Ensure SSH PermitUserEnvironment is disabled"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -188,7 +188,7 @@
   tags:
       - id_5.2.10
 
-- name: "SCORED | 5.2.11 | Ensure only approved ciphers are used"
+- name: "5.2.11 | Ensure only approved ciphers are used"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -197,7 +197,7 @@
   tags:
       - id_5.2.11
 
-- name: "SCORED | 5.2.12 | Ensure only approved MAC algorithms are used"
+- name: "5.2.12 | Ensure only approved MAC algorithms are used"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -206,7 +206,7 @@
   tags:
       - id_5.2.12
 
-- name: "SCORED | 5.2.13 | Ensure SSH Idle Timeout Interval is configured"
+- name: "5.2.13 | Ensure SSH Idle Timeout Interval is configured"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -215,7 +215,7 @@
   tags:
       - id_5.2.13
 
-- name: "SCORED | 5.2.13 | Ensure SSH Idle Timeout Interval is configured"
+- name: "5.2.13 | Ensure SSH Idle Timeout Interval is configured"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -224,7 +224,7 @@
   tags:
       - id_5.2.13
 
-- name: "SCORED | 5.2.14 | Ensure SSH LoginGraceTime is set to one minute or less"
+- name: "5.2.14 | Ensure SSH LoginGraceTime is set to one minute or less"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -233,7 +233,7 @@
   tags:
       - id_5.2.14
 
-- name: "SCORED | 5.2.16 | Ensure SSH warning banner is configured"
+- name: "5.2.16 | Ensure SSH warning banner is configured"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
@@ -242,7 +242,7 @@
   tags:
       - id_5.2.16
 
-- name: "SCORED | 5.3.1 | Ensure password creation requirements are configured"
+- name: "5.3.1 | Ensure password creation requirements are configured"
   lineinfile:
       state: present
       dest: /etc/security/pwquality.conf
@@ -257,7 +257,7 @@
   tags:
       - id_5.3.1
 
-- name: "SCORED | 5.3.2-5.3.4 | Ensure lockout for failed password attempts is configured; password-auth"
+- name: "5.3.2-5.3.4 | Ensure lockout for failed password attempts is configured; password-auth"
   template:
     src: password-auth
     dest: /etc/pam.d/password-auth
@@ -266,7 +266,7 @@
       - id_5.3.3
       - id_5.3.4
 
-- name: "SCORED | 5.3.2-5.3.4 | Ensure lockout for failed password attempts is configured; password-auth"
+- name: "5.3.2-5.3.4 | Ensure lockout for failed password attempts is configured; password-auth"
   template:
     src: system-auth
     dest: /etc/pam.d/system-auth
@@ -275,7 +275,7 @@
       - id_5.3.3
       - id_5.3.4
 
-- name: "SCORED | 5.4.1.1 | Ensure password expiration is 90 days or less"
+- name: "5.4.1.1 | Ensure password expiration is 90 days or less"
   lineinfile:
       state: present
       dest: /etc/login.defs
@@ -284,7 +284,7 @@
   tags:
       - id_5.4.1.1
 
-- name: "SCORED | 5.4.1.2 | Ensure minimum days between password changes is 0 or more"
+- name: "5.4.1.2 | Ensure minimum days between password changes is 0 or more"
   lineinfile:
       state: present
       dest: /etc/login.defs
@@ -293,7 +293,7 @@
   tags:
       - id_5.4.1.2
 
-- name: "SCORED | 5.4.1.3 | Ensure password expiration warning days is 7 or more"
+- name: "5.4.1.3 | Ensure password expiration warning days is 7 or more"
   lineinfile:
       state: present
       dest: /etc/login.defs
@@ -302,7 +302,7 @@
   tags:
       - id_5.4.1.3
 
-- name: "SCORED | 5.4.1.4 | Lock Inactive User Accounts"
+- name: "5.4.1.4 | Lock Inactive User Accounts"
   lineinfile:
       state: present
       dest: /etc/default/useradd
@@ -311,12 +311,12 @@
   tags:
     -  id_5.4.1.4
 
-- name: "SCORED | 5.4.3 | Ensure default group for the root account is GID 0"
+- name: "5.4.3 | Ensure default group for the root account is GID 0"
   command: usermod -g 0 root
   tags:
       - id_5.4.3
 
-- name: "SCORED | 5.4.4 Set Default umask for Users"
+- name: "5.4.4 Set Default umask for Users"
   lineinfile:
     state=present
     create=yes
@@ -326,7 +326,7 @@
   tags:
     - id_5.4.4
 
-- name: "SCORED | 5.4.4 Set Default umask for Users"
+- name: "5.4.4 Set Default umask for Users"
   lineinfile:
     state=present
     create=yes
@@ -336,7 +336,7 @@
   tags:
     - id_5.4.4
 
-- name: "SCORED | 5.6 | Ensure access to the su command is restricted"
+- name: "5.6 | Ensure access to the su command is restricted"
   lineinfile:
     dest: /etc/pam.d/su
     line: 'auth            required        pam_wheel.so use_uid'
