@@ -77,20 +77,29 @@
   tags:
       - rule_6.2.1
 
-- name: "6.2.2 | PATCH | Ensure no legacy '+' entries exist in /etc/passwd"
-  command: sed -i '/^+/ d' /etc/passwd
+- name: "6.2.2 | Ensure no legacy '+' entries exist in /etc/passwd"
+  command: grep '^+:' /etc/passwd
+  register: plus_pass
+  failed_when: plus_pass.rc == 0
+  changed_when: plus_pass.rc == 0
   tags:
-      - rule_6.2.2
+      - id_6.2.2
 
-- name: "6.2.3 | PATCH | Ensure no legacy '+' entries exist in /etc/shadow"
-  command: sed -i '/^+/ d' /etc/shadow
+- name: "6.2.3 | Ensure no legacy '+' entries exist in /etc/shadow"
+  command: grep '^+:' /etc/shadow
+  register: plus_shadow
+  failed_when: plus_shadow.rc == 0
+  changed_when: plus_shadow.rc == 0
   tags:
-      - rule_6.2.3
+      - id_6.2.3
 
-- name: "6.2.4 | PATCH | Ensure no legacy '+' entries exist in /etc/group"
-  command: sed -i '/^+/ d' /etc/group
+- name: "6.2.4 | Ensure no legacy '+' entries exist in /etc/group"
+  command: grep '^+:' /etc/group
+  register: plus_group
+  failed_when: plus_group.rc == 0
+  changed_when: plus_group.rc == 0
   tags:
-      - rule_6.2.4
+      - id_6.2.4
 
 - name: "PRELIM | Gather UID 0 accounts other than root"
   shell: "cat /etc/passwd | awk -F: '($3 == 0 && $1 != \"root\") {i++;print $1 } END {exit i}'"
@@ -242,5 +251,5 @@
       state: absent
       dest: "~{{ item }}/.rhosts"
   with_items: "{{ users.stdout_lines }}"
-  tags:  
+  tags:
       - rule_6.2.14
