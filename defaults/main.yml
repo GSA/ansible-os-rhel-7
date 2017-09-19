@@ -63,6 +63,9 @@ rhel7gsa_is_router: false
 # IPv6 required
 rhel7gsa_ipv6_required: false
 
+# Configure Auditd
+rhel7gsa_auditd_config: true
+
 # AIDE
 rhel7gsa_config_aide: true
 # AIDE cron settings
