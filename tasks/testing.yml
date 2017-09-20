@@ -1,16 +1,8 @@
-- name: 2.2.8-2.2.14 | Ensure DNS,FTP,HTTP,IMAP,POP,Samba,Proxy,SNMP Servers are not enabled (Not Scored)
-  service: >
-      name={{ item }}
-      enabled=no
-  with_items:
-    - cups
-    - bind9
-    - vsftpd
-    - apache2
-    - dovecot
-    - smbd
-    - squid3
-    - snmpd
-  failed_when: False
+- name: "4.1.2 | Ensure auditd service is enabled"
+  systemd:
+      name: auditd
+      state: started
+      enabled: yes
+  when: rhel7gsa_auditd_config == true
   tags:
-    - id_2.2.8-2.2.14
+      - id_4.1.2
