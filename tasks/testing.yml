@@ -1,8 +1,8 @@
-- name: "4.1.2 | Ensure auditd service is enabled"
-  systemd:
-      name: auditd
-      state: started
-      enabled: yes
-  when: rhel7gsa_auditd_config == true
+- name: "5.6 | Ensure access to the su command is restricted"
+  lineinfile:
+    dest: /etc/group
+    insertafter: '^wheel:x:10:'
+    line: 'root,'
+    state: present
   tags:
-      - id_4.1.2
+      - id_5.6 

@@ -12,7 +12,7 @@
 #  - include: section3.yml
 #    tags: section3
 
-  - include: section4.yml
+#  - include: section4.yml
 #    tags: section4
 
 #  - include: section5.yml
@@ -21,5 +21,5 @@
 #  - include: section6.yml
 #    tags: section6
 
-#  - include: testing.yml
+  - include: testing.yml
 #    tags: section6
