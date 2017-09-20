@@ -130,3 +130,11 @@
   when: rhel7gsa_logging == "syslog-ng" and rhel7gsa_config_logging == true
   tags:
       - id_4.2.3
+
+- name: "4.2.4 | Ensure permissions on all logfiles are configured"
+  file:
+    path: /var/log
+    mode: 740
+    recurse: yes
+  tags:
+      - id_4.2.4
