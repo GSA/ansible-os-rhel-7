@@ -12,11 +12,8 @@ For compliance auditing, use a tool such as [nessus](https://www.tenable.com/pro
 
 This code is based on the GSA Red Hat Enterprise Linux Security Benchmark v1.0 and the [CIS RedHat Enterprise Linux 7 Benchmark v2.1.1 ](https://community.cisecurity.org/collab/public/index.php).
 
-## IMPORTANT INSTALL STEP
-
-Requirements
-------------
-Ansible version 2.0 or greater
+Important Information
+---------------------
 
 You should carefully read through the tasks to make sure these changes will not break your systems before running this playbook.
 
@@ -24,13 +21,13 @@ Role Variables
 --------------
 There are many role variables defined in defaults/main.yml.
 
-#####The current default configuration will:
-*Enable IPv6 settings
+##### The current default configuration will:
+..*Enable IPv6 settings
 *Enable iptables
 *Enable auditing with rsyslog
 *Lock users inactive for over 30 days
 
-#####The configuration will not:
+##### The configuration will not:
 *Install and configure AIDE
 *Install and configure NTP
 *Configure the /etc/group wheel configurations
