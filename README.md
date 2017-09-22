@@ -22,10 +22,10 @@ Role Variables
 There are many role variables defined in defaults/main.yml.
 
 ##### The current default configuration will:
-⋅⋅*Enable IPv6 settings
-⋅⋅*Enable iptables
-⋅⋅*Enable auditing with rsyslog
-⋅⋅*Lock users inactive for over 30 days
+⋅⋅*Enable IPv6 settings.
+⋅⋅*Enable iptables.
+⋅⋅*Enable auditing with rsyslog.
+⋅⋅*Lock users inactive for over 30 days.
 
 ##### The configuration will not:
 *Install and configure AIDE
