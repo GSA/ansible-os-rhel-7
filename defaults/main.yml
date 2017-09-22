@@ -107,7 +107,7 @@ rhel7gsa_wireless: false
 
 # 4 Logging and Auditing
 rhel7gsa_auditd_config: true
-hel7gsa_config_logging: true
+rhel7gsa_config_logging: true
 rhel7gsa_logging: rsyslog
 #rhel7gsa_logging: rsyslog-ng
 
