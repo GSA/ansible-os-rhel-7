@@ -124,9 +124,9 @@ rhel7gsa_warning_banner: |
 # CIS 5.4.1.4 says that users who are inactive for over 30 days must have their
 # accounts disabled. This could cause issues in some environments.
 # Options:
-#   yes: disable accounts inactive > 30 days per GSA requirements
-#   no: don't adjust inactive account settings
-lock_inactive: no
+#   true: disable accounts inactive > 30 days per GSA requirements
+#   false: don't adjust inactive account settings
+lock_inactive: true
 
 # 5.6 Configure wheel group members who can access the su command.
 # This configures the /etc/group wheel configurations. This is turned off by default". Chnage to "true" to enable and add the desired names

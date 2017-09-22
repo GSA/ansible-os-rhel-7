@@ -306,7 +306,7 @@
       dest: /etc/default/useradd
       regexp: '^INACTIVE'
       line: 'INACTIVE=30'
-  when: lock_inactive == yes
+  when: lock_inactive == true
   tags:
     -  id_5.4.1.4
 
