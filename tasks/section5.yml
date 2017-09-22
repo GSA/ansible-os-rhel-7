@@ -233,6 +233,8 @@
   tags:
       - id_5.2.14
 
+
+
 - name: "5.2.16 | Ensure SSH warning banner is configured"
   lineinfile:
       state: present
@@ -304,6 +306,7 @@
       dest: /etc/default/useradd
       regexp: '^INACTIVE'
       line: 'INACTIVE=30'
+  when: lock_inactive == yes
   tags:
     -  id_5.4.1.4
 
@@ -339,3 +342,12 @@
     state: present
   tags:
       - id_5.6
+
+- name: 5.6 - Configure wheel group members who can access the su command
+  lineinfile:
+    regexp: "^wheel:"
+    line: "wheel:x:10:{{ wheel_group_members }}"
+    dest: "/etc/group"
+  when: rhel7gsa_wheel == true
+  tags:
+      - id -5.6

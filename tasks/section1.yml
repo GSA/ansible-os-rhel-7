@@ -137,7 +137,7 @@
   command: /usr/sbin/aide --init -B 'database_out=file:/var/lib/aide/aide.db.gz'
   args:
       creates: /var/lib/aide/aide.db.gz
-  when: rhel7gsa_config_aide == "true"
+  when: rhel7gsa_config_aide == true
   async: 45
   poll: 0
   tags:
@@ -155,7 +155,7 @@
       month: "{{ rhel7gsa_aide_cron['aide_month'] | default('*') }}"
       weekday: "{{ rhel7gsa_aide_cron['aide_weekday'] | default('*') }}"
       job: "{{ rhel7gsa_aide_cron['aide_job'] }}"
-  when: rhel7gsa_config_aide == "true"
+  when: rhel7gsa_config_aide == true
   tags:
       - scored
       - aide
