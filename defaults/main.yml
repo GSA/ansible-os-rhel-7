@@ -1,5 +1,5 @@
 ---
-# defaults file for RHEL7-CIS
+# defaults file for RHEL7
 rhel7gsa_section1: true
 rhel7gsa_section2: true
 rhel7gsa_section3: true
@@ -7,20 +7,7 @@ rhel7gsa_section4: true
 rhel7gsa_section5: true
 rhel7gsa_section6: true
 
-#1.2.5 | Disable the rhnsd Daemon
-rhel7gsa_rhnsd_required: false
-
-# 1.4.2 Bootloader password
-rhel7gsa_bootloader_password: random
-rhel7gsa_set_boot_pass: false
-
-# SELinux policy
-# 1.6.1.3 Ensure SELinux policy is configured
-rhel7gsa_selinux_disable: false
-rhel7gsa_selinux_pol: targeted
-
-
-# Service configuration booleans set true to keep service
+# Service configuration booleans set true to keep service/packages
 rhel7gsa_avahi_server: false
 rhel7gsa_cups_server: false
 rhel7gsa_dhcp_server: false
@@ -50,21 +37,14 @@ rhel7gsa_samba: false
 rhel7gsa_squid: false
 rhel7gsa_net_snmp: false
 rhel7gsa_allow_autofs: false
+rhel7gsa_openldap_clients_required: false
+rhel7gsa_telnet_required: false
+rhel7gsa_talk_required: false
+rhel7gsa_rsh_required: false
+rhel7gsa_ypbind_required: false
 
-# xinetd required
-rhel7gsa_xinetd_required: false
-
-# 5.2.9 Permit empty passwords. This is turned off by defualt due to it breaking a standard EC2 ssh connection access with the default ec2-user account.
-rhel7gsa_ssh_required: false
-
-# 3.1.1 and 3.1.2 Configuring IP forwarding
-rhel7gsa_is_router: false
-
-#3.3.1 | Configuring IPv6
-rhel7gsa_ipv6_required: true
-
-# 4.x Configure Auditd
-rhel7gsa_auditd_config: true
+#1.2.5 | Disable the rhnsd Daemon
+rhel7gsa_rhnsd_required: false
 
 # 1.3.1 Install and configure AIDE. This is disabled by default as OSSEC is widely in use
 rhel7gsa_config_aide: true
@@ -79,16 +59,19 @@ rhel7gsa_aide_cron:
   aide_month: '*'
   aide_weekday: '*'
 
-# Set to 'true' if X Windows is needed in your environment
-rhel7gsa_xwindows_required: no
+# 1.4.2 Bootloader password
+rhel7gsa_bootloader_password: random
+rhel7gsa_set_boot_pass: false
 
-rhel7gsa_openldap_clients_required: false
-rhel7gsa_telnet_required: false
-rhel7gsa_talk_required: false
-rhel7gsa_rsh_required: false
-rhel7gsa_ypbind_required: false
+# SELinux policy
+# 1.6.1.3 Ensure SELinux policy is configured
+rhel7gsa_selinux_disable: false
+rhel7gsa_selinux_pol: targeted
 
-# Time Synchronization
+# 2.1.7 xinetd required
+rhel7gsa_xinetd_required: false
+
+# 2.2.1 Time Synchronization
 #rhel7gsa_time_synchronization: chrony
 #rhel7gsa_time_Synchronization: ntp
 
@@ -98,30 +81,40 @@ rhel7gsa_time_synchronization_servers:
     - 2.pool.ntp.org
     - 3.pool.ntp.org
 
+# 2.2.2 Set to 'true' if X Windows is needed in your environment
+rhel7gsa_xwindows_required: no
+
+# 3.1.1 and 3.1.2 Configuring IP forwarding
+rhel7gsa_is_router: false
+
+#3.3.1 | Configuring IPv6
+rhel7gsa_ipv6_required: true
+
 # 3.4.2 | PATCH | Ensure /etc/hosts.allow is configured
 rhel7gsa_host_allow:
     - "10.0.0.0/255.0.0.0"
     - "172.16.0.0/255.240.0.0"
     - "192.168.0.0/255.255.0.0"
 
-# Wireless configuration
-rhel7gsa_wireless: false
-
+# 3.6 Firewall Configurations
 #rhel7gsa_firewall: firewalld
 #rhel7gsa_firewall: iptables_plus !!!NOTE!!! This could break your network connections. Test before implementing.
 rhel7gsa_firewall: iptables
 rhel7gsa_firewall_status: true
 
-# Logging configuration
-rhel7gsa_config_logging: true
+# 3.7 Wireless configuration
+rhel7gsa_wireless: false
+
+# 4 Logging and Auditing
+rhel7gsa_auditd_config: true
+hel7gsa_config_logging: true
 rhel7gsa_logging: rsyslog
 #rhel7gsa_logging: rsyslog-ng
 
-# Warning Banner Content (issue, issue.net, motd)
-rhel7gsa_warning_banner: |
-    Authorized uses only. All activity may be monitored and reported.
+# 5.2.9 Permit empty passwords. This is turned off by defualt due to it breaking a standard EC2 ssh connection access with the default ec2-user account.
+rhel7gsa_ssh_required: false
 
-# CIS 5.4.1.4 says that users who are inactive for over 30 days must have their
+# 5.4.1.4 says that users who are inactive for over 30 days must have their
 # accounts disabled. This could cause issues in some environments.
 # Options:
 #   true: disable accounts inactive > 30 days per GSA requirements
