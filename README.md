@@ -1,6 +1,5 @@
 RHEL 7 GSA Benchmark
 ====================
-[![CircleCI](https://circleci.com/gh/GSA/ansible-os-rhel-7.svg?style=svg)](https://circleci.com/gh/GSA/ansible-os-rhel-7)
 
 ## This role is still under development
 
