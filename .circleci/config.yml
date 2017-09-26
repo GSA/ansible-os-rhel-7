@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  test-centos-7:
+    working_directory: ~/ansible-os-rhel-7
+    machine:
+      ruby:
+        version: 2.4
+      services:
+        - docker
+    steps:
+      - checkout
+      - run:
+          name: Install bundler
+          command: gem install bundler
+      - run:
+          name: Install test-kitchen
+          command: bundle install
+      - run:
+          name: Run test-kitchen
+          command: bundle exec kitchen test test-centos-7
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test-centos-7
