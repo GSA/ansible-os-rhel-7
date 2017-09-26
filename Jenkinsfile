@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        ansiblePlaybook(playbook: 'test.yml', colorized: true, inventory: 'local')
+        ansiblePlaybook(playbook: 'tasks/main.yml', colorized: true)
       }
     }
   }
