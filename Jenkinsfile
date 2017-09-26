@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''yum install curl
+        sh '''sudo yum install curl
 
 \\curl -sSL https://get.rvm.io | bash -s stable --ruby
 
