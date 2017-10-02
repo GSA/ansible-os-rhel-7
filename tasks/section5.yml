@@ -1,7 +1,6 @@
 - name: "5.1.1 | Ensure cron daemon is enabled"
-  become: true
   service:
-      name: crond
+      name: cron
       enabled: yes
   tags:
       - id_5.1.1
@@ -16,7 +15,6 @@
       - id_5.1.2
 
 - name: "5.1.3 | Ensure permissions on /etc/cron.hourly are configured"
-  become: true
   file:
       dest: /etc/cron.hourly
       owner: root
@@ -175,7 +173,7 @@
       dest: /etc/ssh/sshd_config
       regexp: '^PermitEmptyPasswords'
       line: 'PermitEmptyPasswords no'
-  when: rhel7gsa_ssh_required == true
+  when: ubu14gsa_ssh_required == true
   tags:
       - id_5.2.9
 
@@ -233,16 +231,19 @@
   tags:
       - id_5.2.14
 
-
-
-- name: "5.2.16 | Ensure SSH warning banner is configured"
+- name: "5.2.15 | Ensure SSH warning banner is configured"
   lineinfile:
       state: present
       dest: /etc/ssh/sshd_config
       regexp: '^Banner'
       line: 'Banner /etc/issue.net'
   tags:
-      - id_5.2.16
+      - id_5.2.15
+
+- name: "5.3.1 | Ensure password creation requirements are configured"
+  apt:
+    name: libpam-pwquality
+    state: present
 
 - name: "5.3.1 | Ensure password creation requirements are configured"
   lineinfile:
@@ -306,9 +307,22 @@
       dest: /etc/default/useradd
       regexp: '^INACTIVE'
       line: 'INACTIVE=30'
-  when: lock_inactive == true
   tags:
     -  id_5.4.1.4
+
+- name: 5.4.2 | Disable System Accounts
+  shell: awk -F':' '($1!="root" && $1!="sync" && $1!="shutdown" &&$1!="halt" && $3<500 && $7!="/usr/sbin/nologin" && $7!="/bin/false") {print $1}' /etc/passwd
+  register: awk_etc_passwd
+  changed_when: False
+  check_mode: no
+  tags:
+    - id_5.4.2
+
+- name: 5.4.2 | Disable System Accounts
+  command: /usr/sbin/usermod -s /usr/sbin/nologin {{ item }}
+  with_items: "{{awk_etc_passwd.stdout_lines}}"
+  tags:
+    - id_5.4.2
 
 - name: "5.4.3 | Ensure default group for the root account is GID 0"
   command: usermod -g 0 root
@@ -342,12 +356,3 @@
     state: present
   tags:
       - id_5.6
-
-- name: 5.6 - Configure wheel group members who can access the su command
-  lineinfile:
-    regexp: "^wheel:"
-    line: "wheel:x:10:{{ wheel_group_members }}"
-    dest: "/etc/group"
-  when: rhel7gsa_wheel == true
-  tags:
-      - id -5.6

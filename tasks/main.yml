@@ -18,8 +18,33 @@
   - include: section5.yml
 #    tags: section5
 
+<<<<<<< HEAD
+  - include: section_07.yml
+    tags: section07
+
+  - include: section_08.yml
+    tags: section08
+
+  - include: section_06.yml
+    tags: section06
+
+  - include: section_09.yml
+    tags: section09
+
+  - include: section_10.yml
+    tags: section10
+
+  - include: section_11.yml
+    tags: section11
+
+  - include: section_12.yml
+    tags: section12
+
+  - include: section_13.yml
+    tags: section13
+=======
   - include: section6.yml
 #    tags: section6
 
 #  - include: testing.yml
-#    tags: section6
+>>>>>>> ubuntu_ansible_dev

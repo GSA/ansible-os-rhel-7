@@ -1,400 +1,181 @@
-- name: "2.1.1 | Ensure chargen services are not enabled | chargen-dgram"
-  stat:
-      path: /etc/xinetd.d/chargen-dgram
-  register: chargen_dgram_service
+- name: "2.1.1-2.1.10 | Ensure rsh, rlogin, rexec, talk, telnet, chargen, daytime, echo, discard, time is not enabled (stat inetd)"
+  stat: path=/etc/inetd.conf
+  register: inetd_path
   tags:
-      - id_2.1.1
+  - id_2.1.1-2.1.10
 
-- name: "2.1.1 | Ensure chargen services are not enabled | chargen-dgram"
-  command: chkconfig chargen-dgram off
-  when: chargen_dgram_service.stat.exists
+- name: "2.1.1-2.1.10 | Ensure rsh, rlogin, rexec, talk, telnet, chargen, daytime, echo, discard, time is not enabled"
+  lineinfile: >
+      dest=/etc/inetd.conf
+      regexp='^({{ item }}.*)'
+      line='#\1'
+      state=present
+      backrefs=yes
+      backup=yes
+  with_items:
+      - chargen
+      - daytime
+      - discard
+      - echo
+      - time
+      - shell
+      - login
+      - exec
+      - talk
+      - ntalk
+      - telnet
+      - tftp
+      - xinetd
+  when: inetd_path.stat.exists == True
   tags:
-      - id_2.1.1
+  - id_2.1.1-2.1.10
 
-- name: "2.1.1 | Ensure chargen services are not enabled | chargen-stream"
-  stat:
-      path: /etc/xinetd.d/chargen-stream
-  register: chargen_stream_service
+- name: "2.2.1.1 | Ensure time synchronization is in use"
+  apt:
+      name: ntp
+      state: present
+  when: ubu14gsa_time_usentp == True
   tags:
-      - id_2.1.1
+      - id_2.1.1.1
 
-- name: "2.1.1 | Ensure chargen services are not enabled | chargen-stream"
-  command: chkconfig chargen-stream off
-  when: chargen_stream_service.stat.exists
+- name: "2.2.1.1 | Ensure time synchronization is in use"
+  apt:
+      name: chrony
+      state: present
+  when: ubu14gsa_time_usechrony == True
   tags:
-      - id_2.1.1
-
-- name: "2.1.2 | Ensure daytime services are not enabled | daytime-dgram"
-  stat:
-      path: /etc/xinetd.d/daytime-dgram
-  register: daytime_dgram_service
-  tags:
-      - id_2.1.2
-
-- name: "2.1.2 | Ensure daytime services are not enabled | daytime-dgram"
-  command: chkconfig daytime-dgram off
-  when: daytime_dgram_service.stat.exists
-  tags:
-      - id_2.1.2
-
-- name: "2.1.2 | Ensure daytime services are not enabled | daytime-stream"
-  stat:
-      path: /etc/xinetd.d/daytime-stream
-  register: daytime_stream_service
-  tags:
-      - id_2.1.2
-
-- name: "2.1.2 | Ensure daytime services are not enabled | daytime-stream"
-  command: chkconfig daytime-stream off
-  when: daytime_stream_service.stat.exists
-  tags:
-      - id_2.1.2
-
-- name: "2.1.3 | Ensure discard services are not enabled | discard-dgram"
-  stat:
-      path: /etc/xinetd.d/discard-dgram
-  register: discard_dgram_service
-  tags:
-      - id_2.1.3
-
-- name: "2.1.3 | Ensure discard services are not enabled | discard-dgram"
-  command: chkconfig discard-dgram off
-  when: discard_dgram_service.stat.exists
-  tags:
-      - id_2.1.3
-
-- name: "2.1.3 | Ensure discard services are not enabled | discard-stream"
-  stat:
-      path: /etc/xinetd.d/discard-stream
-  register: discard_stream_service
-  tags:
-      - id_2.1.3
-
-- name: "2.1.3 | Ensure discard services are not enabled | discard-stream"
-  command: chkconfig discard-stream off
-  when: discard_stream_service.stat.exists
-  tags:
-      - id_2.1.3
-
-- name: "2.1.4 | Ensure echo services are not enabled | echo-dgram"
-  stat:
-      path: /etc/xinetd.d/echo-dgram
-  register: echo_dgram_service
-  tags:
-      - id_2.1.4
-
-- name: "2.1.4 | Ensure echo services are not enabled | echo-dgram"
-  command: chkconfig echo-dgram off
-  when: echo_dgram_service.stat.exists
-  tags:
-      - id_2.1.4
-
-- name: "2.1.4 | Ensure echo services are not enabled | echo-stream"
-  stat:
-      path: /etc/xinetd.d/echo-stream
-  register: echo_stream_service
-  tags:
-      - id_2.1.4
-
-- name: "2.1.4 | Ensure echo services are not enabled | echo-stream"
-  command: chkconfig echo-stream off
-  when: echo_stream_service.stat.exists
-  tags:
-      - id_2.1.4
-
-- name: "2.1.5 | Ensure time services are not enabled | time-dgram"
-  stat:
-      path: /etc/xinetd.d/time-dgram
-  register: time_dgram_service
-  tags:
-      - id_2.1.5
-
-- name: "2.1.5 | Ensure time services are not enabled | time-dgram"
-  command: chkconfig time-dgram off
-  when: time_dgram_service.stat.exists
-  tags:
-      - id_2.1.5
-
-- name: "2.1.5 | Ensure time services are not enabled | time-stream"
-  stat:
-      path: /etc/xinetd.d/time-stream
-  register: time_stream_service
-  tags:
-      - id_2.1.5
-
-- name: "2.1.5 | Ensure time services are not enabled | time-stream"
-  command: chkconfig time-stream off
-  when: time_stream_service.stat.exists
-  tags:
-      - id_2.1.5
-
-- name: "2.1.6 | Ensure tftp server is not enabled"
-  stat:
-      path: /etc/xinetd.d/tftp
-  register: tftp_service
-  tags:
-      - id_2.1.6
-
-- name: "2.1.6 | Ensure tftp server is not enabled"
-  command: chkconfig tftp off
-  when: tftp_service.stat.exists and rhel7gsa_tftp_server == false
-  tags:
-      - id_2.1.6
-
-- name: "2.1.7 | Ensure xinetd is not enabled"
-  service:
-      name: xinetd
-      state: stopped
-      enabled: no
-  when:
-      - xinetd_service_status.stdout == "loaded" and not rhel7gsa_xinetd_required
-  tags:
-      - id_2.1.7
-
+      - id_2.1.1.1
 
 - name: "2.2.2 | Ensure X Window System in not installed"
-  yum:
+  apt:
       name: xorg-x11-server-common.x86_64
       state: absent
   tags:
       - id_2.2.2
 
-- name: "2.2.3 | Ensure Avahi Server is not enabled"
-  service:
-      name: avahi-daemon
-      state: stopped
-      enabled: no
-  when: rhel7gsa_avahi_server == false and avahi_service_status.stdout == "loaded"
+- name: 2.2.3-2.2.14 | Ensure DNS,FTP,HTTP,IMAP,POP,Samba,Proxy,SNMP Servers are not enabled (Not Scored)
+  service: >
+      name={{ item }}
+      enabled=no
+  with_items:
+    - avahi-daemon
+    - cups
+    - isc-dhcp-server
+    - nfs-kernel-server
+    - rpcbind
+    - slapd
+    - bind9
+    - vsftpd
+    - apache2
+    - dovecot
+    - smbd
+    - squid3
+    - snmpd
+  failed_when: False
   tags:
-      - id_2.2.3
+    - id_2.2.8-2.2.14
 
-- name: "2.2.4 | Ensure CUPS is not enabled"
-  service:
-      name: cups
-      state: stopped
-      enabled: no
-  when: rhel7gsa_cups_server == false and cups_service_status.stdout == "loaded"
+- name: 2.2.15 Configure Mail Transfer Agent for Local-Only Mode
+  stat: path=/etc/postfix/main.cf
+  register: postfix_main_cf
   tags:
-      - id_2.2.4
+    - id_2.2.15
 
-- name: "2.2.5 | Ensure DHCP Server is not enabled"
-  service:
-      name: dhcpd
-      state: stopped
-      enabled: no
-  when: rhel7gsa_dhcp_server == false and dhcpd_service_status.stdout == "loaded"
+- name: 2.2.15 | Configure Mail Transfer Agent for Local-Only Mode (Scored)
+  lineinfile: >
+      dest=/etc/postfix/main.cf
+      regexp='^inet_interfaces ='
+      line='inet_interfaces = localhost'
+      state=present
+  when: postfix_main_cf.stat.exists == True
   tags:
-      - id_2.2.5
+    - id_2.2.15
 
-- name: "2.2.6 | Ensure LDAP server is not enabled"
-  service:
-      name: slapd
-      state: stopped
-      enabled: no
-  when: rhel7gsa_ldap_server == false and slapd_service_status.stdout == "loaded"
+- name: 2.2.15 | Configure Mail Transfer Agent for Local-Only Mode (Scored)
+  lineinfile: >
+      dest=/etc/postfix/main.cf
+      regexp='^inet_protocols ='
+      line='inet_protocols = ipv4'
+      state=present
+  when: postfix_main_cf.stat.exists == True and ubu14gsa_ipv6_required == true
   tags:
-      - id_2.2.6
+    - id_2.2.15
 
-- name: "2.2.7 | Ensure NFS and RPC are not enabled"
-  service:
-      name: nfs
-      state: stopped
-      enabled: no
-  when: rhel7gsa_nfs_rpc_server == false and nfs_service_status.stdout == "loaded"
+- name: 2.2.16 | Ensure rsync service is not enabled
+  stat: path=/etc/default/rsync
+  register: default_rsync
   tags:
-      - id_2.2.7
+    - id_2.2.16
 
-- name: "2.2.7 | Ensure NFS and RPC are not enabled"
-  service:
-      name: rpcbind
-      state: stopped
-      enabled: no
-  when: rhel7gsa_nfs_rpc_server == false and rpcbind_service_status.stdout == "loaded"
+- name: 2.2.16 | Ensure rsync service is not enabled
+  lineinfile: >
+      dest='/etc/default/rsync'
+      regexp='^RSYNC_ENABLE'
+      line='RSYNC_ENABLE=false'
+  when: default_rsync.stat.exists == True
   tags:
-      - id_2.2.7
+    - id_2.2.16
 
-- name: "2.2.8 | Ensure DNS Server is not enabled"
-  service:
-      name: named
-      state: stopped
-      enabled: no
-  when: rhel7gsa_named_server == false and named_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.8
-
-- name: "2.2.9 | Ensure FTP Server is not enabled"
-  service:
-      name: vsftpd
-      state: stopped
-      enabled: no
-  when: rhel7gsa_vsftpd_server == false and vsftpd_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.9
-
-- name: "2.2.10 | Ensure HTTP server is not enabled"
-  service:
-      name: httpd
-      state: stopped
-      enabled: no
-  when: rhel7gsa_httpd_server == false and httpd_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.10
-
-- name: "2.2.11 | Ensure IMAP and POP3 server is not enabled"
-  service:
-      name: dovecot
-      state: stopped
-      enabled: no
-  when: rhel7gsa_dovecot_server == false and dovecot_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.11
-
-- name: "2.2.12 | Ensure Samba is not enabled"
-  service:
-      name: smb
-      state: stopped
-      enabled: no
-  when: rhel7gsa_smb_server == false and smb_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.12
-
-- name: "2.2.13 | Ensure HTTP Proxy Server is not enabled"
-  service:
-      name: squid
-      state: stopped
-      enabled: no
-  when: rhel7gsa_squid_server == false and squid_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.13
-
-- name: "2.2.14 | Ensure SNMP Server is not enabled"
-  service:
-      name: snmpd
-      state: stopped
-      enabled: no
-  when: rhel7gsa_snmp_server == false and snmpd_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.14
-
-- name: "2.2.16 | Ensure NIS Server is not enabled"
+- name: "2.2.17 | Ensure NIS Server is not enabled"
   service:
       name: ypserv
       state: stopped
       enabled: no
-  when: rhel7gsa_nis_server == false and ypserv_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.16
-
-- name: "2.2.17 | Ensure rsh server is not enabled | rsh"
-  service:
-      name: rsh.socket
-      state: stopped
-      enabled: no
-  when: rhel7gsa_rsh_server == false and rsh_service_status.stdout == "loaded"
+  failed_when: False
   tags:
       - id_2.2.17
 
-- name: "2.2.17 | Ensure rsh server is not enabled | rlogin"
-  service:
-      name: rlogin.socket
-      state: stopped
-      enabled: no
-  when: rhel7gsa_rsh_server == false and rlogin_service_status.stdout == "loaded"
+- name: 2.2.3-2.2.14 | Ensure DNS,FTP,HTTP,IMAP,POP,Samba,Proxy,SNMP Servers are not enabled (Not Scored)
+  apt: >
+      name={{ item }}
+      state=absent
+  with_items:
+    - nis
+    - rsh-client
+    - rsh-redone-client
+    - talk
+    - telnet
+    - ldap-utils
   tags:
-      - id_2.2.17
+    - id_2.3.1-2.3.5
 
-- name: "2.2.17 | Ensure rsh server is not enabled | rexec"
-  service:
-      name: rexec.socket
-      state: stopped
-      enabled: no
-  when: rhel7gsa_rsh_server == false and rexec_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.17
-
-- name: "2.2.18 | Ensure talk server is not enabled"
-  service:
-      name: ntalk
-      state: stopped
-      enabled: no
-  when: rhel7gsa_ntalk_server == false and ntalk_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.18
-
-- name: "2.2.19 | Ensure telnet server is not enabled"
-  service:
-      name: telnet
-      state: stopped
-      enabled: no
-  when: rhel7gsa_telnet_server == false and telnet_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.19
-
-- name: "2.2.20 | Ensure tftp server is not enabled"
-  service:
-      name: tftp
-      state: stopped
-      enabled: no
-  when: rhel7gsa_tftp_server == false and tftp_service_status.stdout == "loaded"
-  tags:
-      - insecure_services
-      - tftp
-      - id_2.2.20
-
-- name: "2.2.21 | Ensure rsync service is not enabled "
-  service:
-      name: rsyncd
-      state: stopped
-      enabled: no
-  when: rhel7gsa_rsyncd_server == false and rsyncd_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.21
-
-- name: "2.2.21 | Ensure talk server is not enabled"
-  service:
-      name: ntalk
-      state: stopped
-      enabled: no
-  when: rhel7gsa_ntalk_server == false and ntalk_service_status.stdout == "loaded"
-  tags:
-      - id_2.2.21
 
 - name: "2.3.1 | Ensure NIS Client is not installed"
-  yum:
+  apt:
       name: ypbind
       state: absent
-  when: rhel7gsa_ypbind_required == false
+  when: ubu14gsa_ypbind_required == false
   tags:
       - id_2.3.1
 
 - name: "2.3.2 | Ensure rsh client is not installed"
-  yum:
+  apt:
       name: rsh
       state: absent
-  when: rhel7gsa_rsh_required == false
+  when: ubu14gsa_rsh_required == false
   tags:
       - id_2.3.2
 
 - name: "2.3.3 | Ensure talk client is not installed"
-  yum:
+  apt:
       name: talk
       state: absent
-  when: rhel7gsa_talk_required == false
+  when: ubu14gsa_talk_required == false
   tags:
       - id_2.3.3
 
 - name: "2.3.4 | Ensure telnet client is not installed"
-  yum:
+  apt:
       name: telnet
       state: absent
-  when: rhel7gsa_telnet_required == false
+  when: ubu14gsa_telnet_required == false
   tags:
       - id_2.3.4
 
 - name: "2.3.5 | Ensure LDAP client is not installed"
-  yum:
+  apt:
       name: openldap-clients
       state: absent
-  when: rhel7gsa_openldap_clients_required == false
+  when: ubu14gsa_openldap_clients_required == false
   tags:
       - id_2.3.5
