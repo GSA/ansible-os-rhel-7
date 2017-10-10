@@ -4,4 +4,4 @@
   become: yes
 
   roles:
-    - ansible-os-rhel-7
+    - os-hardening
