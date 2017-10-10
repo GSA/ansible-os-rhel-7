@@ -5,9 +5,8 @@
       state: present
       reload: yes
       ignoreerrors: yes
-  when: rhel7gsa_is_router == false
+  when: ubu14gsa_is_router == false
   tags:
-
       - id_3.1.1
 
 - name: "3.1.2 | Ensure packet redirect sending is disabled"
@@ -21,9 +20,8 @@
   with_items:
       - { name: net.ipv4.conf.all.send_redirects, value: 0 }
       - { name: net.ipv4.conf.default.send_redirects, value: 0 }
-  when: rhel7gsa_is_router == false
+  when: ubu14gsa_is_router == false
   tags:
-
       - id_3.1.2
 
 - name: "3.2.1 | Ensure source routed packets are not accepted"
@@ -38,7 +36,6 @@
       - { name: net.ipv4.conf.all.accept_source_route, value: 0 }
       - { name: net.ipv4.conf.default.accept_source_route, value: 0 }
   tags:
-
       - id_3.2.1
 
 - name: "3.2.2 | Ensure ICMP redirects are not accepted"
@@ -53,7 +50,6 @@
       - { name: net.ipv4.conf.all.accept_redirects, value: 0 }
       - { name: net.ipv4.conf.default.accept_redirects, value: 0 }
   tags:
-
       - id_3.2.2
 
 - name: "3.2.3 | Ensure secure ICMP redirects are not accepted"
@@ -139,7 +135,7 @@
   with_items:
       - { name: net.ipv6.conf.all.accept_ra, value: 0 }
       - { name: net.ipv6.conf.default.accept_ra, value: 0 }
-  when: rhel7gsa_ipv6_required == true
+  when: ubu14gsa_ipv6_required == true
   tags:
       - id_3.3.1
 
@@ -153,7 +149,7 @@
   with_items:
       - { name: net.ipv6.conf.all.accept_redirects, value: 0 }
       - { name: net.ipv6.conf.default.accept_redirects, value: 0 }
-  when: rhel7gsa_ipv6_required == true
+  when: ubu14gsa_ipv6_required == true
   tags:
       - id_3.3.2
 
@@ -162,13 +158,13 @@
       dest: /etc/modprobe.d/CIS.conf
       line: "options ipv6 disable=1"
       state: present
-  when: rhel7gsa_ipv6_required == true
+  when: ubu14gsa_ipv6_required == true
   tags:
       - id_3.3.3
 
 - name: "3.4.1 | Ensure TCP Wrappers is installed"
-  yum:
-    name: tcp_wrappers
+  apt:
+    name: tcpd
     state: present
   tags:
       - id_3.4.1
@@ -181,7 +177,6 @@
       mode: 0644
   tags:
       - id_3.4.5
-
 
 - name: "3.4.5 | Ensure permissions on /etc/hosts.deny are 644"
   file:
@@ -229,10 +224,10 @@
       - id_3.5.4
 
 - name: "3.6 | Ensure firewalld is installed and started | CUSTOM"
-  yum:
+  apt:
       name: firewalld
       state: present
-  when: rhel7gsa_firewall == "firewalld"
+  when: ubu14gsa_firewall == "firewalld"
   tags:
       - id_3.6
 
@@ -241,21 +236,21 @@
       name: firewalld
       state: stopped
       enabled: no
-  when: rhel7gsa_firewall == "firewalld"
+  when: ubu14gsa_firewall == "firewalld"
   tags:
       - id_3.6
 
 - name: "3.6.1 | Ensure iptables is installed"
-  yum:
+  apt:
       name: iptables
       state: present
-  when: rhel7gsa_firewall == "iptables"
+  when: ubu14gsa_firewall == "iptables"
   tags:
       - id_3.6.1
 
 - name: "3.6.2 | Configuring ssh to not break connections"
   command: iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT
-  when: rhel7gsa_firewall == "iptables_plus" and rhel7gsa_firewall_status == true
+  when: ubu14gsa_firewall == "iptables_plus" and ubu14gsa_firewall_status == true
   tags:
       - id_3.6.2
 
@@ -263,7 +258,7 @@
   iptables:
     chain: INPUT
     policy: DROP
-  when: rhel7gsa_firewall == "iptables_plus" and rhel7gsa_firewall_status == true
+  when: ubu14gsa_firewall == "iptables_plus" and ubu14gsa_firewall_status == true
   tags:
       - id_3.6.2
 
@@ -271,7 +266,7 @@
   iptables:
     chain: FORWARD
     policy: DROP
-  when: rhel7gsa_firewall == "iptables_plus" and rhel7gsa_firewall_status == true
+  when: ubu14gsa_firewall == "iptables_plus" and ubu14gsa_firewall_status == true
   tags:
       - id_3.6.2
 
@@ -279,10 +274,18 @@
   iptables:
     chain: OUTPUT
     policy: DROP
-  when: rhel7gsa_firewall == "iptables_plus" and rhel7gsa_firewall_status == true
+  when: ubu14gsa_firewall == "iptables_plus" and ubu14gsa_firewall_status == true
   tags:
       - id_3.6.2
 
 - name: "Saving iptables rules"
   command: /sbin/service iptables save
-  when: rhel7gsa_firewall == "iptables_plus" and rhel7gsa_firewall_status == true
+  when: ubu14gsa_firewall == "iptables_plus" and ubu14gsa_firewall_status == true
+
+- name: 3.7 | Deactivate Wireless Interfaces
+  shell: 'lspci -k | grep -i wifi'
+  changed_when: False
+  register: lspci_wifi
+  failed_when: lspci_wifi.rc == 0
+  tags:
+    - id_3.7

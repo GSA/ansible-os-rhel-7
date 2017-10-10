@@ -1,81 +1,81 @@
-- name: "6.1.2 | PATCH | Ensure permissions on /etc/passwd are configured"
+- name: "6.1.2 | Ensure permissions on /etc/passwd are configured"
   file:
       dest: /etc/passwd
       owner: root
       group: root
       mode: 0644
   tags:
-      - rule_6.1.2
+      - id_6.1.2
 
-- name: "6.1.3 | PATCH | Ensure permissions on /etc/shadow are configured"
+- name: "6.1.3 | Ensure permissions on /etc/shadow are configured"
   file:
       dest: /etc/shadow
       owner: root
       group: root
       mode: 0000
   tags:
-      - rule_6.1.3
+      - id_6.1.3
 
-- name: "6.1.4 | PATCH | Ensure permissions on /etc/group are configured"
+- name: "6.1.4 | Ensure permissions on /etc/group are configured"
   file:
       dest: /etc/group
       owner: root
       group: root
       mode: 0600
   tags:
-      - rule_6.1.4
+      - id_6.1.4
 
-- name: "6.1.5 | PATCH | Ensure permissions on /etc/gshadow are configured"
+- name: "6.1.5 | Ensure permissions on /etc/gshadow are configured"
   file:
       dest: /etc/gshadow
       owner: root
       group: root
       mode: 0000
   tags:
-      - rule_6.1.5
+      - id_6.1.5
 
-- name: "6.1.6 | PATCH | Ensure permissions on /etc/passwd- are configured"
+- name: "6.1.6 | Ensure permissions on /etc/passwd- are configured"
   file:
       dest: /etc/passwd-
       owner: root
       group: root
       mode: 0600
   tags:
-      - rule_6.1.6
+      - id_6.1.6
 
-- name: "6.1.7 | PATCH | Ensure permissions on /etc/shadow- are configured"
+- name: "6.1.7 | Ensure permissions on /etc/shadow- are configured"
   file:
       dest: /etc/shadow-
       owner: root
       group: root
       mode: 0000
   tags:
-      - rule_6.1.7
+      - id_6.1.7
 
-- name: "6.1.8 | PATCH | Ensure permissions on /etc/group- are configured"
+- name: "6.1.8 | Ensure permissions on /etc/group- are configured"
   file:
       dest: /etc/group-
       owner: root
       group: root
       mode: 0600
   tags:
-      - rule_6.1.8
+      - id_6.1.8
 
-- name: "6.1.9 | PATCH | Ensure permissions on /etc/gshadow- are configured"
+- name: "6.1.9 | Ensure permissions on /etc/gshadow- are configured"
   file:
       dest: /etc/gshadow-
       owner: root
       group: root
       mode: 0600
   tags:
-      - rule_6.1.9
+      - id_6.1.9
 
-- name: "6.2.1 | PATCH | Ensure password fields are not empty"
+- name: "6.2.1 | Ensure password fields are not empty"
   command: passwd -l {{ item }}
   with_items: "{{ empty_password_accounts.stdout_lines }}"
   when: empty_password_accounts.rc
   tags:
-      - rule_6.2.1
+      - id_6.2.1
 
 - name: "6.2.2 | Ensure no legacy '+' entries exist in /etc/passwd"
   command: grep '^+:' /etc/passwd
@@ -107,66 +107,43 @@
   changed_when: no
   check_mode: no
 
-- name: "6.2.5 | PATCH | Ensure root is the only UID 0 account"
+- name: "6.2.5 | Ensure root is the only UID 0 account"
   command: passwd -l {{ item }}
   with_items: "{{ uid_zero_accounts_except_root.stdout_lines }}"
   when: uid_zero_accounts_except_root.rc
   tags:
-      - rule_6.2.5
 
-- name: "6.2.6 | Ensure root PATH Integrity"
-  shell: |
-    if [ "`echo $PATH | /bin/grep :: `" != "" ]; then
-      echo "Empty Directory in PATH (::)"
-    fi
-    if [ "`echo $PATH | bin/grep :$`" != "" ]; then
-      echo "Trailing : in PATH"
-    fi
-    p=`echo $PATH | /bin/sed -e 's/::/:/' -e 's/:$//' -e 's/:/ /g'`
-    set -- $p
-    while [ "$1" != "" ]; do
-      if [ "$1" = "." ]; then
-        echo "PATH contains ."
-        shift
-        continue
-      fi
-      if [ -d $1 ]; then
-        dirperm=`/bin/ls -ldH $1 | /bin/cut -f1 -d" "`
-        if [ `echo $dirperm | /bin/cut -c6 ` != "-" ]; then
-          echo "Group Write permission set on directory $1"
-        fi
-        if [ `echo $dirperm | /bin/cut -c9 ` != "-" ]; then
-          echo "Other Write permission set on directory $1"
-        fi
-        dirown=`ls -ldH $1 | awk '{print $3}'`
-        if [ "$dirown" != "root" ] ; then
-          echo $1 is not owned by root
-        fi
-      else
-        echo $1 is not a directory
-      fi
-      shift
-    done
-  register: result6_2_6
-  changed_when: "result6_2_6.stdout"
-  failed_when: "result6_2_6.stdout"
+
+
+      - id_6.2.5
+
+- name: 6.2.6 | Ensure root PATH Integrity (empty value)
+  shell: 'echo $PATH | grep ::'
+  register: path_colon
+  changed_when: False
+  check_mode: no
+  failed_when: path_colon.rc == 0
   tags:
     - id_6.2.6
 
-
-- name: "6.2.7 | Ensure all users' home directories exist"
-  shell: |
-    cat /etc/passwd | awk -F: '{ print $1 " " $3 " " $6 }' | while read user uid dir; do
-    if [ $uid -ge 1000 -a ! -d "$dir" -a $user != "nfsnobody" ]; then
-        echo "The home directory ($dir) of user $user does not exist."
-    fi
-    done
-  register: result6_2_7
-  changed_when: "result6_2_7.stdout"
-  failed_when: "result6_2_7.stdout"
-  ignore_errors: yes
+- name: 6.2.6 | Ensure root PATH Integrity (colon end) (Scored)
+  shell: 'echo $PATH | grep :$'
+  register: path_colon_end
+  changed_when: False
+  check_mode: no
+  failed_when: path_colon_end.rc == 0
   tags:
-    - id_6.2.7
+    - id_6.2.6
+
+- name: 6.2.6 | Ensure root PATH Integrity (dot in path) (Scored)
+  shell: "/bin/bash --login -c 'env | grep ^PATH=' | sed -e 's/PATH=//' -e 's/::/:/' -e 's/:$//' -e 's/:/\\n/g'"
+  become: yes
+  register: dot_in_path
+  changed_when: False
+  check_mode: no
+  failed_when: '"." in dot_in_path.stdout_lines'
+  tags:
+    - id_6.2.6
 
 - name: "6.2.8 | Check Permissions on User Home Directories"
   shell: |
@@ -222,21 +199,27 @@
     - id_6.2.10
 
 
-- name: "6.2.11 | PATCH | Ensure no users have .forward files"
+- name: "6.2.11 | Ensure no users have .forward files"
   file:
       state: absent
       dest: "~{{ item }}/.forward"
   with_items: "{{ users.stdout_lines }}"
   tags:
-      - rule_6.2.11
 
-- name: "6.2.12 | PATCH | Ensure no users have .netrc files"
+
+
+      - id_6.2.11
+
+- name: "6.2.12 | Ensure no users have .netrc files"
   file:
       state: absent
       dest: "~{{ item }}/.netrc"
   with_items: "{{ users.stdout_lines }}"
   tags:
-      - rule_6.2.12
+
+
+
+      - id_6.2.12
 
 - name: "6.2.13 |Check for Presence of User .netrc Files"
   shell:  for h in $(/bin/awk -F':' '$7 !~ /\/sbin\/nologin/ && $7 !~ /\/bin\/false/ { print $6 }' /etc/passwd); do if [[ -f $h/.netrc && -s $h/.netrc ]]; then echo $h; fi ; done
@@ -246,10 +229,13 @@
   tags:
     - id_6.2.13
 
-- name: "6.2.14 | PATCH | Ensure no users have .rhosts files"
+- name: "6.2.14 | Ensure no users have .rhosts files"
   file:
       state: absent
       dest: "~{{ item }}/.rhosts"
   with_items: "{{ users.stdout_lines }}"
   tags:
-      - rule_6.2.14
+
+
+
+      - id_6.2.14
