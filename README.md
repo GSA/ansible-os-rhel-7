@@ -1,8 +1,6 @@
 RHEL 7 GSA Benchmark
 ====================
 
-## This role is still under development
-
 This ansible content will configure RHEL/Centos 7 machine to be GSA compliant.
 
 This role **will make changes to the system** that could break things.
