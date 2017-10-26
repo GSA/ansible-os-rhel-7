@@ -9,7 +9,7 @@ This role **will make changes to the system** that could break things.
 
 For compliance auditing, use a tool such as [nessus](https://www.tenable.com/products/nessus-vulnerability-scanner) or [CIS-CAT](https://learn.cisecurity.org/cis-cat-landing-page)
 
-This code is based on the GSA Red Hat Enterprise Linux Security Benchmark v1.0 and the [CIS RedHat Enterprise Linux 7 Benchmark v2.1.1 ](https://community.cisecurity.org/collab/public/index.php).
+This code is based on the GSA Red Hat Enterprise Linux Security Benchmark v1.0 and the [CIS RedHat Enterprise Linux 7 Benchmark v2.1.1 ](https://www.cisecurity.org/cis-benchmarks/).
 
 Important Information
 ---------------------
