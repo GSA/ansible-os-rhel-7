@@ -49,7 +49,7 @@ Example Playbook
   become: yes
 
   roles:
-    - gsa_hardening
+    - ansible-os-rhel-7
 ```
 How to test locally
 --------------------------
