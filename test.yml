@@ -1,7 +1,0 @@
-- name: Example-Playbook
-  hosts: all
-  #playbook requires become to run cmd as root
-  become: yes
-
-  roles:
-    - ansible-os-rhel-7
