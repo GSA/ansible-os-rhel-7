@@ -1,22 +1,21 @@
 ---
 
   - include: prelim.yml
-#    tags: prelim
 
   - include: section1.yml
-#    tags: section1
+    when: rhel7gsa_section1
 
   - include: section2.yml
-#    tags: section2
+    when: rhel7gsa_section2
 
   - include: section3.yml
-#    tags: section3
+    when: rhel7gsa_section3
 
   - include: section4.yml
-#    tags: section4
+    when: rhel7gsa_section4
 
   - include: section5.yml
-#    tags: section5
+    when: rhel7gsa_section5
 
   - include: section6.yml
-#    tags: section6
+    when: rhel7gsa_section6
