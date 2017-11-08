@@ -1,21 +1,21 @@
 ---
 
-  - include: prelim.yml
+  - include_tasks: prelim.yml
 
-  - include: section1.yml
+  - include_tasks: section1.yml
     when: rhel7gsa_section1
 
-  - include: section2.yml
+  - include_tasks: section2.yml
     when: rhel7gsa_section2
 
-  - include: section3.yml
+  - include_tasks: section3.yml
     when: rhel7gsa_section3
 
-  - include: section4.yml
+  - include_tasks: section4.yml
     when: rhel7gsa_section4
 
-  - include: section5.yml
+  - include_tasks: section5.yml
     when: rhel7gsa_section5
 
-  - include: section6.yml
+  - include_tasks: section6.yml
     when: rhel7gsa_section6
