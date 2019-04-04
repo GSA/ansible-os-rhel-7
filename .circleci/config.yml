@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    # Using Machine Executor to build privledged containers
+    machine:
+      image: circleci/classic:latest
+    working_directory: ~/ansible-os-rhel-7
+    steps:
+      - checkout
+      - run:
+          name: Pull Docker Image
+          command: docker-compose pull centos:7
+      - run:
+          name: Set up remote container
+          command: |
+            docker-compose up -d centos7
+      - run:
+          name: Install Ansible in remote container
+          command: |
+            docker-compose exec centos7 pip install ansible
+      - run:
+          name: Run playbook.yml playbook in remote Docker container
+          command: |
+            docker-compose exec centos7 ansible-playbook -vv playbook.yml
+      - run:
+          name: Run playbook.yml again, checking to make sure it's idempotent
+          command: >
+            sudo docker-compose exec -T centos7 ansible-playbook --connection=local --inventory 127.0.0.1, /ansible-os-rhel-7/playbook.yml | grep 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
