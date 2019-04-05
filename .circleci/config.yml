@@ -4,7 +4,7 @@ jobs:
     # Using Machine Executor to build privledged containers
     machine:
       image: circleci/classic:latest
-    working_directory: ~/
+    #working_directory: ~/
     steps:
       - checkout
       - run:
