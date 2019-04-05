@@ -4,7 +4,7 @@ jobs:
     # Using Machine Executor to build privledged containers
     machine:
       image: circleci/classic:latest
-    working_directory: ~/ansible-os-rhel-7
+    working_directory: ~/
     steps:
       - checkout
       - run:
@@ -18,10 +18,6 @@ jobs:
           name: Install Ansible in remote container
           command: |
             docker-compose exec centos7 yum -y install ansible
-      - run:
-          name: TEMP-Find the playbook path
-          command: |
-            docker-compose exec centos7 grep -r -i "#playbook requires become to run cmd as root" /home
       - run:
           name: Run playbook.yml playbook in remote Docker container
           command: |
