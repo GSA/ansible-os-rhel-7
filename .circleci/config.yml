@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Pull Docker Image
-          command: docker-compose pull centos:7
+          command: docker-compose pull centos7
       - run:
           name: Set up remote container
           command: |
