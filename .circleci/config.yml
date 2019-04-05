@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Install Ansible in remote container
           command: |
-            docker-compose exec centos7 pip install ansible
+            docker-compose exec centos7 yum -y install ansible
       - run:
           name: Run playbook.yml playbook in remote Docker container
           command: |
