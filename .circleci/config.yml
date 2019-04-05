@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Run playbook.yml playbook in remote Docker container
           command: |
-            docker-compose exec centos7 /ansible-os-rhel-7/ansible-playbook -vv playbook.yml
+            docker-compose exec centos7 ansible-playbook -vv /ansible-os-rhel-7/playbook.yml
       - run:
           name: Run playbook.yml again, checking to make sure it's idempotent
           command: >
