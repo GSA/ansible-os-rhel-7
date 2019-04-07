@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Copy Ansible Code to Remote Container
           command: |
-            docker-compose exec centos7 yum -y install ansible
+            docker cp /home/circleci/project/. centos7:/home/circleci/project/
       - run:
           name: Run playbook.yml playbook in remote Docker container
           command: |
