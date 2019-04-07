@@ -4,7 +4,7 @@ jobs:
     # Using Machine Executor to build privledged containers
     machine:
       image: circleci/classic:latest
-    #working_directory: ~/
+    #working_directory: ansible-os-rhel-7/
     steps:
       - checkout
       - run:
@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Copy Ansible Code to Remote Container
           command: |
-            docker-compose exec centos7 mkdir -p /home/circleci/project && docker cp /home/circleci/project/. centos7:/home/circleci/project/
+            docker-compose exec centos7 mkdir -p /home/circleci/project && docker cp /home/circleci/project/. centos7:/home/circleci/project/ansible-os-rhel-7/
       - run:
           name: Testing
           command: |
