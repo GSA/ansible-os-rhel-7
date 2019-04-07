@@ -8,6 +8,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Host System Setup
+          command: sudo service apparmor teardown
+      - run:
           name: Pull Docker Image
           command: docker-compose pull centos7
       - run:
