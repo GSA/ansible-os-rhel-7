@@ -1,5 +1,5 @@
 centos7:
-  image: centos:systemd
+  image: centos:7
   container_name: centos7
   privileged: true
   tty: true
