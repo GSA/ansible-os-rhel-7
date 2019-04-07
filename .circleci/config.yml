@@ -20,7 +20,7 @@ jobs:
             docker-compose exec centos7 yum -y install ansible
       - run:
           name: Copy Ansible Code to Remote Container
-          command: |
+          command: >
             docker-compose exec centos7 mkdir -p /home/circleci/project && docker cp /home/circleci/project/. centos7:/home/circleci/project/
         - run:
           name: Testing
