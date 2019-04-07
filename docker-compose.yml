@@ -5,3 +5,4 @@ centos7:
   tty: true
   volumes:
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    - /home/circleci/project:/home/circleci/project
