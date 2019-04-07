@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Run playbook.yml playbook in remote Docker container
           command: |
-            docker-compose exec -T centos7 cp /home/circleci/project/. /etc/ansible/roles
+            docker-compose exec -T centos7 cp -r /home/circleci/project/* /etc/ansible/roles
             docker-compose exec -T centos7 ansible-playbook -vv --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml
       - run:
           name: Run playbook.yml again, checking to make sure it's idempotent
