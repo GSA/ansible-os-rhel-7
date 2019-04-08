@@ -1,8 +1,10 @@
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.1 | Ensure cron daemon is enabled"
   become: true
   service:
       name: crond
       enabled: yes
+  ignore_errors: yes
   tags:
       - id_5.1.1
 
