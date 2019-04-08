@@ -1,6 +1,6 @@
 centos7:
     build: .
-    image: centos:7
+    #image: centos:7
     container_name: centos7
     privileged: true
     tty: true
