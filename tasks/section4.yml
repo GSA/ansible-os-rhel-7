@@ -41,7 +41,7 @@
       name: auditd
       state: started
       enabled: yes
-  ignoreerrors: yes
+  ignore_errors: yes
   when: rhel7gsa_auditd_config == true
   tags:
       - id_4.1.2
