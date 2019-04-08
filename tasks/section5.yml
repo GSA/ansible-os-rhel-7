@@ -17,7 +17,7 @@
   ignore_errors: yes
   tags:
       - id_5.1.2
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.3 | Ensure permissions on /etc/cron.hourly are configured"
   become: true
   file:
@@ -25,36 +25,40 @@
       owner: root
       group: root
       mode: 0600
+  ignore_errors: yes
   tags:
       - id_5.1.3
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.4 | Ensure permissions on /etc/cron.daily are configured"
   file:
       dest: /etc/cron.daily
       owner: root
       group: root
       mode: 0600
+  ignore_errors: yes
   tags:
       - id_5.1.4
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.5 | Ensure permissions on /etc/cron.weekly are configured"
   file:
       dest: /etc/cron.weekly
       owner: root
       group: root
       mode: 0600
+  ignore_errors: yes
   tags:
       - id_5.1.5
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.6 | Ensure permissions on /etc/cron.monthly are configured"
   file:
       dest: /etc/cron.monthly
       owner: root
       group: root
       mode: 0600
+  ignore_errors: yes
   tags:
       - id_5.1.6
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.7 | Ensure permissions on /etc/cron.d are configured"
   file:
       dest: /etc/cron.d
@@ -62,16 +66,18 @@
       owner: root
       group: root
       mode: 0600
+  ignore_errors: yes
   tags:
       - id_5.1.7
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
       dest: /etc/at.deny
       state: absent
+  ignore_errors: yes
   tags:
       - id_5.1.8
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
       dest: /etc/at.allow
@@ -79,16 +85,18 @@
       owner: root
       group: root
       mode: 0600
+  ignore_errors: yes
   tags:
       - id_5.1.8
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
       dest: /etc/cron.deny
       state: absent
+  ignore_errors: yes
   tags:
       - id_5.1.8
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.8 | Ensure at/cron is restricted to authorized users"
   file:
       dest: /etc/cron.allow
@@ -96,6 +104,7 @@
       owner: root
       group: root
       mode: 0600
+  ignore_errors: yes
   tags:
       - id_5.1.8
 
