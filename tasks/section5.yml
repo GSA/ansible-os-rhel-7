@@ -7,13 +7,14 @@
   ignore_errors: yes
   tags:
       - id_5.1.1
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "5.1.2 | Ensure permissions on /etc/crontab are configured"
   file:
       dest: /etc/crontab
       owner: root
       group: root
       mode: 0600
+  ignore_errors: yes
   tags:
       - id_5.1.2
 
