@@ -3,8 +3,8 @@ centos7:
     #image: centos:7
     container_name: centos7
     privileged: true
-    sysctls:
-      - net.ipv4.tcp_syncookies=1
+    #sysctls:
+      #- net.ipv4.tcp_syncookies=1
     tty: true
     volumes:
       #- /sys/fs/cgroup:/sys/fs/cgroup:ro
