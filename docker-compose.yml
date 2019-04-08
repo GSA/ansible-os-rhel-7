@@ -1,8 +1,11 @@
 centos7:
-  image: centos:7
+  #image: centos:7
+  services:
+    ansibleci:
+      build: .
   container_name: centos7
   privileged: true
   tty: true
   volumes:
-    - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    #- /sys/fs/cgroup:/sys/fs/cgroup:ro
     - /home/circleci/project:/home/circleci/project
