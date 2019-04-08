@@ -87,13 +87,14 @@
   when: rhel7gsa_logging == "rsyslog" and rhel7gsa_config_logging == true
   tags:
       - id_4.2.1.1
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "4.2.1.3 | Ensure rsyslog default file permissions configured"
   lineinfile:
       dest: /etc/rsyslog.conf
       regexp: "^\\$FileCreateMode"
       line:  "$FileCreateMode 0640"
       state: present
+  ignore_errors: yes
   when: rhel7gsa_logging == "rsyslog" and rhel7gsa_config_logging == true
   tags:
       - id_4.2.1.3
