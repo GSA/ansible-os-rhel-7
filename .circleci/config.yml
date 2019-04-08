@@ -28,7 +28,8 @@ jobs:
       - run:
           name: Testing
           command: |
-            docker-compose exec centos7 ls && cd /home && ls && cd /home/circleci/ && ls && cd /home/circleci/project && ls && cd /home/circleci/project/ansible-os-rhel-7/ && ls     
+            #docker-compose exec centos7 ls && cd /home && ls && cd /home/circleci/ && ls && cd /home/circleci/project && ls && cd /home/circleci/project/ansible-os-rhel-7/ && ls
+            sysctl -n net.ipv4.tcp_syncookies     
       - run:
           name: Run playbook.yml playbook in remote Docker container
           command: |
