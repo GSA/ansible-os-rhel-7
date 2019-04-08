@@ -77,12 +77,13 @@
       - id_4.1.16
       - id_4.1.17
       - id_4.1.18
-
+#Fix Me ? Container/Host issue added ignore errors
 - name: "4.2.1.1 Ensure rsyslog Service is enabled"
   systemd:
       name: rsyslog
       enabled: yes
       state: started
+  ignore_errors: yes
   when: rhel7gsa_logging == "rsyslog" and rhel7gsa_config_logging == true
   tags:
       - id_4.2.1.1
