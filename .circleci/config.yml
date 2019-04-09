@@ -34,7 +34,9 @@ jobs:
             docker-compose exec centos7 systemctl start  sshd
             docker-compose exec centos7 yum -y install cronie
             docker-compose exec centos7 systemctl enable crond.service
-            docker-compose exec centos7 systemctl start crond.service   
+            docker-compose exec centos7 systemctl start crond.service
+            docker-compose exec centos7 systemctl enable auditd
+            docker-compose exec centos7 service auditd start  
       - run:
           name: Run playbook.yml in remote Docker container
           command: |
