@@ -4,7 +4,7 @@
   service:
       name: crond
       enabled: yes
-  ignore_errors: yes
+  #ignore_errors: yes
   tags:
       - id_5.1.1
 #Fix Me ? Container/Host issue added ignore errors
