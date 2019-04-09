@@ -45,5 +45,4 @@ jobs:
       - run:
           name: Run playbook.yml again, checking to make sure it's idempotent
           command: >
-            set +e
-            docker-compose exec -T centos7 ansible-playbook --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml | grep 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+            set +e && docker-compose exec -T centos7 ansible-playbook --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml | grep 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
