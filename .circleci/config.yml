@@ -37,7 +37,7 @@ jobs:
             docker-compose exec centos7 systemctl start crond.service
             docker-compose exec centos7 yum -y install audit audit-libs
             docker-compose exec centos7 systemctl start auditd
-            docker-compose exec centos7 sudo systemctl enable auditd  
+            docker-compose exec centos7 systemctl enable auditd  
       - run:
           name: Run playbook.yml in remote Docker container
           command: |
