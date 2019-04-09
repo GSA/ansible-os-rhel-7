@@ -14,7 +14,6 @@
       owner: root
       group: root
       mode: 0600
-  ignore_errors: yes
   tags:
       - id_5.1.2
 #Fix Me ? Container/Host issue added ignore errors
@@ -25,7 +24,6 @@
       owner: root
       group: root
       mode: 0600
-  ignore_errors: yes
   tags:
       - id_5.1.3
 #Fix Me ? Container/Host issue added ignore errors
@@ -35,7 +33,6 @@
       owner: root
       group: root
       mode: 0600
-  ignore_errors: yes
   tags:
       - id_5.1.4
 #Fix Me ? Container/Host issue added ignore errors
@@ -45,7 +42,6 @@
       owner: root
       group: root
       mode: 0600
-  ignore_errors: yes
   tags:
       - id_5.1.5
 #Fix Me ? Container/Host issue added ignore errors
@@ -55,7 +51,6 @@
       owner: root
       group: root
       mode: 0600
-  ignore_errors: yes
   tags:
       - id_5.1.6
 #Fix Me ? Container/Host issue added ignore errors
@@ -66,7 +61,6 @@
       owner: root
       group: root
       mode: 0600
-  ignore_errors: yes
   tags:
       - id_5.1.7
 #Fix Me ? Container/Host issue added ignore errors
@@ -74,7 +68,6 @@
   file:
       dest: /etc/at.deny
       state: absent
-  ignore_errors: yes
   tags:
       - id_5.1.8
 #Fix Me ? Container/Host issue added ignore errors
@@ -85,7 +78,6 @@
       owner: root
       group: root
       mode: 0600
-  ignore_errors: yes
   tags:
       - id_5.1.8
 #Fix Me ? Container/Host issue added ignore errors
@@ -93,7 +85,6 @@
   file:
       dest: /etc/cron.deny
       state: absent
-  ignore_errors: yes
   tags:
       - id_5.1.8
 #Fix Me ? Container/Host issue added ignore errors
@@ -104,7 +95,6 @@
       owner: root
       group: root
       mode: 0600
-  ignore_errors: yes
   tags:
       - id_5.1.8
 
