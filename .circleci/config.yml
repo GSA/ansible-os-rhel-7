@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    # Using Machine Executor to build privledged containers
     machine:
       image: circleci/classic:latest
     steps:
