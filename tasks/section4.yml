@@ -41,7 +41,6 @@
       name: auditd
       state: started
       enabled: yes
-  ignore_errors: yes
   when: rhel7gsa_auditd_config == true
   tags:
       - id_4.1.2
@@ -52,7 +51,6 @@
       regexp: '(^GRUB_CMDLINE_LINUX\s*\=\s*)(?:")(.+)(?<!audit=1)(?:")'
       replace: '\1"\2 audit=1"'
       follow: yes
-  ignore_errors: yes
   when: rhel7gsa_auditd_config == true
   tags:
       - id_4.1.3
@@ -83,7 +81,6 @@
       name: rsyslog
       enabled: yes
       state: started
-  ignore_errors: yes
   when: rhel7gsa_logging == "rsyslog" and rhel7gsa_config_logging == true
   tags:
       - id_4.2.1.1
@@ -94,7 +91,6 @@
       regexp: "^\\$FileCreateMode"
       line:  "$FileCreateMode 0640"
       state: present
-  ignore_errors: yes
   when: rhel7gsa_logging == "rsyslog" and rhel7gsa_config_logging == true
   tags:
       - id_4.2.1.3

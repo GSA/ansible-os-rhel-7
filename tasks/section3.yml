@@ -33,7 +33,6 @@
       sysctl_set: yes
       state: present
       reload: yes
-      #ignoreerrors: yes
   with_items:
       - { name: net.ipv4.conf.all.accept_source_route, value: 0 }
       - { name: net.ipv4.conf.default.accept_source_route, value: 0 }
@@ -124,7 +123,6 @@
       value: 1
       state: present
       reload: yes
-      ignoreerrors: yes
   tags:
       - id_3.2.8
 #FIXME ? Container/Host issue added ignore errors
@@ -135,7 +133,6 @@
       sysctl_set: yes
       state: present
       reload: yes
-      ignoreerrors: yes
   with_items:
       - { name: net.ipv6.conf.all.accept_ra, value: 0 }
       - { name: net.ipv6.conf.default.accept_ra, value: 0 }
@@ -150,7 +147,6 @@
       sysctl_set: yes
       state: present
       reload: yes
-      ignoreerrors: yes
   with_items:
       - { name: net.ipv6.conf.all.accept_redirects, value: 0 }
       - { name: net.ipv6.conf.default.accept_redirects, value: 0 }
