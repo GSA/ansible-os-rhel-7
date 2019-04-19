@@ -35,7 +35,7 @@ jobs:
             #docker-compose exec centos7 yum -y install grub2
             #docker-compose exec centos7 grub2-install /dev/sda
             #docker-compose exec centos7 grub2-install --grub-setup=/bin/true /dev/sda
-            docker-compose exec centos7 grub2-mkconfig
+            docker-compose exec centos7 /usr/sbin/grub2-mkconfig
       - run:
           name: Run playbook.yml in remote Docker container
           command: |
