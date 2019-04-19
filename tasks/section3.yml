@@ -125,6 +125,7 @@
       reload: yes
   tags:
       - id_3.2.8
+      - no_test
 #FIXME ? Container/Host issue added ignore errors
 - name: "3.3.1 | Ensure IPv6 router advertisements are not accepted"
   sysctl:
