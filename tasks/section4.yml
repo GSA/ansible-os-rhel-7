@@ -44,6 +44,7 @@
   when: rhel7gsa_auditd_config == true
   tags:
       - id_4.1.2
+      - no_test
 #FIXME ignore_errors enabled auditd not fully supported inside containers
 - name: "4.1.3 | Ensure auditing for processes that start prior to auditd is enabled"
   replace:
