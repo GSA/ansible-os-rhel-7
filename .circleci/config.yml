@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Run playbook.yml in remote Docker container
           command: |
-            docker-compose exec -T centos7 cp -r /home/circleci/project/* /etc/ansible/roles
+            #docker-compose exec -T centos7 cp -r /home/circleci/project/* /etc/ansible/roles
             docker-compose exec -T centos7 ansible-playbook -vv --skip-tags no_test --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml
       #FIXME Uncomment once tasks are all idempotent
       #FIXME Uncomment once tasks are all idempotent
