@@ -32,12 +32,6 @@ jobs:
             docker-compose exec centos7 yum -y install cronie
             docker-compose exec centos7 systemctl enable crond.service
             docker-compose exec centos7 systemctl start crond.service
-            docker-compose exec centos7 yum -y install grub2-efi shim
-            #docker-compose exec centos7 grub2-install /dev/sda
-            #docker-compose exec centos7 grub2-install --grub-setup=/bin/true /dev/sda
-            docker-compose exec centos7 /usr/sbin/grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
-            #docker-compose exec centos7 /usr/sbin/grub-install /dev/sda
-            #docker-compose exec centos7 /usr/sbin/grub2-mkconfig
       - run:
           name: Run playbook.yml in remote Docker container
           command: |
