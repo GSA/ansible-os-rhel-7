@@ -36,10 +36,6 @@ jobs:
             docker-compose exec centos7 systemctl start crond.service
             docker-compose exec centos7 yum -y install rsyslog
       - run:
-          name: Temp Test Step
-          command: |
-           docker-compose exec centos7 cat /etc/audit/auditd.conf
-      - run:
           name: Run playbook.yml in remote Docker container
           command: |
             docker-compose exec -T centos7 mkdir -p /etc/ansible/roles
