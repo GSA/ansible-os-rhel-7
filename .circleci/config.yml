@@ -41,6 +41,7 @@ jobs:
             docker-compose exec -T centos7 mkdir -p /etc/ansible/roles
             docker-compose exec -T centos7 cp -r /home/circleci/project/* /etc/ansible/roles
             docker-compose exec -T centos7 ansible-playbook -vv --skip-tags no_test --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml
+            docker-compose exec -T centos7 ansible-playbook -vv --skip-tags no_test --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml
       - run:
           name: Run playbook.yml again, checking to make sure it's idempotent
           command: >
