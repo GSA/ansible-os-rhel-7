@@ -18,7 +18,8 @@ jobs:
       - run:
           name: Install Ansible in remote container
           command: |
-            docker-compose exec centos7 yum -y install ansible
+            docker-compose exec centos7 easy_install pip
+            docker-compose exec centos7 pip install ansible
       - run:
           name: Copy Ansible Code to Remote Container
           command: |
