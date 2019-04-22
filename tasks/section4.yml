@@ -9,7 +9,7 @@
 - name: "4.1.1.1 | Ensure audit log storage size is configured"
   lineinfile:
       dest: /etc/audit/auditd.conf
-      regexp: "^max_log_file"
+      regexp: "max_log_file = *..|max_log_file = 10"
       line: "max_log_file = 10"
       state: present
   when: rhel7gsa_auditd_config == true
