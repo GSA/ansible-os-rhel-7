@@ -18,7 +18,9 @@ jobs:
       - run:
           name: Install Ansible in remote container
           command: |
-            docker-compose exec centos7 yum -y install ansible
+            docker-compose exec centos7 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+            docker-compose exec centos7 python get-pip.py
+            docker-compose exec centos7 pip install ansible
       - run:
           name: Copy Ansible Code to Remote Container
           command: |
@@ -32,13 +34,14 @@ jobs:
             docker-compose exec centos7 yum -y install cronie
             docker-compose exec centos7 systemctl enable crond.service
             docker-compose exec centos7 systemctl start crond.service
+            docker-compose exec centos7 yum -y install rsyslog
       - run:
           name: Run playbook.yml in remote Docker container
           command: |
+            docker-compose exec -T centos7 mkdir -p /etc/ansible/roles
             docker-compose exec -T centos7 cp -r /home/circleci/project/* /etc/ansible/roles
-            docker-compose exec -T centos7 ansible-playbook -vv --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml
-      #FIXME Uncomment once tasks are all idempotent
-      #- run:
-       #   name: Run playbook.yml again, checking to make sure it's idempotent
-        #  command: >
-         #   docker-compose exec -T centos7 ansible-playbook --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml | grep 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+            docker-compose exec -T centos7 ansible-playbook -vv --skip-tags no_test --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml
+      - run:
+          name: Run playbook.yml again, checking to make sure it's idempotent
+          command: >
+            docker-compose exec -T centos7 ansible-playbook --skip-tags no_test --connection=local --inventory 127.0.0.1, /home/circleci/project/ansible-os-rhel-7/playbook.yml | grep 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
