@@ -199,7 +199,6 @@
       state: present
       reload: yes
       sysctl_set: yes
-      #FIXME do we still need? ignoreerrors: yes
   tags:
       - sysctl
       - id_1.5.1
@@ -211,7 +210,6 @@
       state: present
       reload: yes
       sysctl_set: yes
-      #FIXME do we still need? ignoreerrors: yes
   tags:
       - id_1.5.3
 

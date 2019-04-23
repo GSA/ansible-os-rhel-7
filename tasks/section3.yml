@@ -4,7 +4,6 @@
       value: 0
       state: present
       reload: yes
-      #FIXME do we still need? ignoreerrors: yes
   when: rhel7gsa_is_router == false
   tags:
 
@@ -17,7 +16,6 @@
       sysctl_set: yes
       state: present
       reload: yes
-      #FIXME do we still need? ignoreerrors: yes
   with_items:
       - { name: net.ipv4.conf.all.send_redirects, value: 0 }
       - { name: net.ipv4.conf.default.send_redirects, value: 0 }
@@ -47,7 +45,6 @@
       sysctl_set: yes
       state: present
       reload: yes
-      #FIXME do we still need? ignoreerrors: yes
   with_items:
       - { name: net.ipv4.conf.all.accept_redirects, value: 0 }
       - { name: net.ipv4.conf.default.accept_redirects, value: 0 }
@@ -62,7 +59,6 @@
       sysctl_set: yes
       state: present
       reload: yes
-      #FIXME do we still need? ignoreerrors: yes
   with_items:
       - { name: net.ipv4.conf.all.secure_redirects, value: 0 }
       - { name: net.ipv4.conf.default.secure_redirects, value: 0 }
@@ -76,7 +72,6 @@
       sysctl_set: yes
       state: present
       reload: yes
-      #FIXME do we still need? ignoreerrors: yes
   with_items:
       - { name: net.ipv4.conf.all.log_martians, value: 1 }
       - { name: net.ipv4.conf.default.log_martians, value: 1 }
@@ -89,7 +84,6 @@
       value: 1
       state: present
       reload: yes
-      #FIXME do we still need? ignoreerrors: yes
   tags:
       - id_3.2.5
 
@@ -99,7 +93,6 @@
       value: 1
       state: present
       reload: yes
-      #FIXME do we still need? ignoreerrors: yes
   tags:
       - id_3.2.6
 
@@ -110,13 +103,11 @@
       sysctl_set: yes
       state: present
       reload: yes
-      #FIXME do we still need ?ignoreerrors: yes
   with_items:
       - { name: net.ipv4.conf.all.rp_filter, value: 1 }
       - { name: net.ipv4.conf.default.rp_filter, value: 1 }
   tags:
       - id_3.2.7
-#FIXME Ignore errors enabled due to Container Issue
 - name: "3.2.8 | Ensure TCP SYN Cookies is enabled"
   sysctl:
       name: net.ipv4.tcp_syncookies
@@ -126,7 +117,6 @@
   tags:
       - id_3.2.8
       - no_test
-#FIXME ? Container/Host issue added ignore errors
 - name: "3.3.1 | Ensure IPv6 router advertisements are not accepted"
   sysctl:
       name: '{{ item.name }}'
@@ -140,7 +130,7 @@
   when: rhel7gsa_ipv6_required == true
   tags:
       - id_3.3.1
-#FIXME ? Container/Host issue added ignore errors
+      
 - name: "3.3.2 | Ensure IPv6 redirects are not accepted"
   sysctl:
       name: '{{ item.name }}'

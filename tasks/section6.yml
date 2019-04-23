@@ -164,7 +164,6 @@
   register: result6_2_7
   changed_when: "result6_2_7.stdout"
   failed_when: "result6_2_7.stdout"
-  #FIXME is this still required? ignore_errors: yes
   tags:
     - id_6.2.7
 
@@ -189,7 +188,6 @@
   register: result6_2_8
   changed_when: "result6_2_8.stdout"
   failed_when: "result6_2_8.stdout"
-  #FIXME - is this still required? ignore_errors: yes
   tags:
     - id_6.2.8
 

@@ -1,4 +1,4 @@
-RHEL 7 GSA Benchmark
+RHEL 7 GSA Benchmark [![CircleCI](https://circleci.com/gh/GSA/ansible-os-rhel-7.svg?style=shield)](https://circleci.com/gh/GSA/ansible-os-rhel-7)
 ====================
 
 This ansible content will configure RHEL/Centos 7 machine to be GSA compliant.
@@ -37,7 +37,7 @@ Note, a subset of controls were removed due to operational impact or organizatio
 Dependencies
 ------------
 
-Ansible > 2.4
+Ansible >= 2.7
 
 Example Playbook
 -------------------------
